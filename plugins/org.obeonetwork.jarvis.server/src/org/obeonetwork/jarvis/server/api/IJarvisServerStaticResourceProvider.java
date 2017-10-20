@@ -8,29 +8,24 @@
  * Contributors:
  *    Obeo - initial API and implementation
  *******************************************************************************/
-package org.obeonetwork.jarvis.core.internal;
+package org.obeonetwork.jarvis.server.api;
 
 import java.io.InputStream;
 import java.util.Optional;
 
-import org.obeonetwork.jarvis.server.api.IJarvisServerPlugin;
-
 /**
- * Contribution to the Jarvis Server.
+ * Interface used to contribute static resources to the server.
  *
  * @author sbegaudeau
  */
-public class JarvisCoreServerPlugin implements IJarvisServerPlugin {
-
+public interface IJarvisServerStaticResourceProvider {
 	/**
-	 * {@inheritDoc}
+	 * Returns an optional containing an input stream for the given path if the plugin can handle the given path or an
+	 * empty optional otherwise.
 	 *
-	 * @see org.obeonetwork.jarvis.server.api.IJarvisServerPlugin#getResource(java.lang.String)
+	 * @param path
+	 *            The path of the resource requested
+	 * @return An optional with an input stream for the resource if it exists
 	 */
-	@Override
-	public Optional<InputStream> getResource(String path) {
-		// TODO Read resources from a webapp repository in the bundle
-		return Optional.empty();
-	}
-
+	Optional<InputStream> getResource(String path);
 }

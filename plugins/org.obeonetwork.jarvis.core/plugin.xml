@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.obeonetwork.jarvis.server.jarvisServerStaticResourceProvider">
+      <descriptor
+            class="org.obeonetwork.jarvis.core.internal.JarvisCoreStaticResourceProvider"
+            description="description"
+            id="org.obeonetwork.jarvis.core.StaticResourceProvider"
+            label="label">
+      </descriptor>
+   </extension>
+
+</plugin>

@@ -12,11 +12,15 @@ package org.obeonetwork.jarvis.server.internal;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.Servlet;
 
 import org.eclipse.equinox.http.jetty.JettyConfigurator;
 import org.eclipse.equinox.http.jetty.JettyConstants;
+import org.obeonetwork.jarvis.server.api.IJarvisServerStaticResourceProvider;
+import org.obeonetwork.jarvis.server.internal.extensions.IItemDescriptor;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.http.whiteboard.HttpWhiteboardConstants;
 
@@ -103,9 +107,14 @@ public class JarvisServerManager {
 		jarvisAPIServletProperties.put(HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN, JarvisAPIServlet.ALIAS);
 		context.registerService(Servlet.class, jarvisAPIServlet, jarvisAPIServletProperties);
 
-		// TODO Register the static resources servlet populated with all the JarvisServerPlugins
-		// TODO Collect the JarvisServerPlugin instances with an extension point
-		// context.registerService(Servlet.class, jarvisResourcesServlet, jarvisResourcesServletProperties);
+		List<IItemDescriptor<IJarvisServerStaticResourceProvider>> descriptors = JarvisServerPlugin.getPlugin()
+				.getJarvisServerStaticResourceProviderRegistry().getItemDescriptors();
+		List<IJarvisServerStaticResourceProvider> staticResourceProviders = descriptors.stream().map(IItemDescriptor::getItem)
+				.collect(Collectors.toList());
+		JarvisResourceServlet jarvisResourceServlet = new JarvisResourceServlet(staticResourceProviders);
+		Dictionary<String, Object> jarvisResourceServletProperties = new Hashtable<>();
+		jarvisResourceServletProperties.put(HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN, JarvisResourceServlet.ALIAS);
+		context.registerService(Servlet.class, jarvisResourceServlet, jarvisResourceServletProperties);
 	}
 
 	/**

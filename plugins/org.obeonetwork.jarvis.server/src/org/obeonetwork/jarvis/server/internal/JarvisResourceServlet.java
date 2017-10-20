@@ -10,12 +10,10 @@
  *******************************************************************************/
 package org.obeonetwork.jarvis.server.internal;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import com.google.common.io.ByteStreams;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -24,14 +22,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.obeonetwork.jarvis.server.api.IJarvisServerPlugin;
+import org.obeonetwork.jarvis.server.api.IJarvisServerStaticResourceProvider;
 
 /**
  * The HTTP servlet used to serve static resources.
  *
  * @author sbegaudeau
  */
-public class JarvisResourcesServlet extends HttpServlet {
+public class JarvisResourceServlet extends HttpServlet {
+
+	/**
+	 * The path of the servlet.
+	 */
+	public static final String ALIAS = "/*"; //$NON-NLS-1$
 
 	/**
 	 * The generated serial version UID.
@@ -39,18 +42,18 @@ public class JarvisResourcesServlet extends HttpServlet {
 	private static final long serialVersionUID = 8744804601658933904L;
 
 	/**
-	 * The plugins.
+	 * The static resource providers.
 	 */
-	private Collection<IJarvisServerPlugin> plugins;
+	private Collection<IJarvisServerStaticResourceProvider> staticResourceProviders;
 
 	/**
 	 * The constructor.
 	 *
-	 * @param plugins
-	 *            The plugins
+	 * @param staticResourceProviders
+	 *            The static resource providers
 	 */
-	public JarvisResourcesServlet(Collection<IJarvisServerPlugin> plugins) {
-		this.plugins = plugins;
+	public JarvisResourceServlet(Collection<IJarvisServerStaticResourceProvider> staticResourceProviders) {
+		this.staticResourceProviders = staticResourceProviders;
 	}
 
 	/**
@@ -64,7 +67,7 @@ public class JarvisResourcesServlet extends HttpServlet {
 		String path = req.getPathInfo();
 
 		// @formatter:off
-		Optional<InputStream> optionalInputStream = this.plugins.stream()
+		Optional<InputStream> optionalInputStream = this.staticResourceProviders.stream()
 				.map(plugin -> plugin.getResource(path))
 				.filter(Optional::isPresent)
 				.map(Optional::get)
@@ -72,14 +75,8 @@ public class JarvisResourcesServlet extends HttpServlet {
 		// @formatter:on
 
 		if (optionalInputStream.isPresent()) {
-			InputStream inputStream = optionalInputStream.get();
-			try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));) {
-				String input = ""; //$NON-NLS-1$
-				while ((input = bufferedReader.readLine()) != null) {
-					BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(resp.getOutputStream()));
-					bufferedWriter.write(input);
-					bufferedWriter.newLine();
-				}
+			try (InputStream inputStream = optionalInputStream.get();) {
+				ByteStreams.copy(inputStream, resp.getOutputStream()); // TODO Remove the dependency to Guava!!!
 			}
 		} else {
 			resp.getWriter().write("Not found"); //$NON-NLS-1$
