@@ -10,6 +10,11 @@
  *******************************************************************************/
 package org.obeonetwork.jarvis.server.internal;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +23,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.business.api.session.SessionManager;
+import org.obeonetwork.jarvis.workflow.Workflow;
 
 /**
  * The servlet of the HTTP API.
@@ -79,8 +88,22 @@ public class JarvisAPIServlet extends HttpServlet {
 	 *             In case of error
 	 */
 	private void getWorkflow(HttpServletRequest req, HttpServletResponse resp, String sessionId) throws IOException {
-		// TODO Use the Sirius session
-		String data = "{\"sections\": [{\"title\": \"Capture\"}, {\"title\": \"Analyze\"}, {\"title\": \"Analyze\"}, {\"title\": \"Analyze\"}]}"; //$NON-NLS-1$
+		Session session = SessionManager.INSTANCE.getSessions().iterator().next(); // ExistingSession(URI.createURI(sessionId));
+		WorkflowConverter converter = new WorkflowConverter(session);
+		Workflow workflow = converter.computeEffectiveWorkflow();
+		Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
+
+			@Override
+			public boolean shouldSkipField(FieldAttributes f) {
+				return f.getDeclaringClass().getName().startsWith("org.eclipse.emf"); //$NON-NLS-1$
+			}
+
+			@Override
+			public boolean shouldSkipClass(Class<?> clazz) {
+				return false;
+			}
+		}).create();
+		String data = gson.toJson(workflow);
 		resp.setContentType("application/json"); //$NON-NLS-1$
 		resp.setCharacterEncoding("UTF-8"); //$NON-NLS-1$
 		resp.getWriter().write(data);

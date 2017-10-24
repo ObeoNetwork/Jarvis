@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="workflow" nsURI="http://www.obeonetwork.org/dsl/jarvis/workflow"
+    nsPrefix="workflow">
+  <eClassifiers xsi:type="ecore:EClass" name="Workflow">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPages" upperBound="-1"
+        eType="#//Page" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Page">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="descriptionText" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imagePath" eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/ImagePath"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" lowerBound="1"
+        eType="#//description/PageDescription"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedSections" upperBound="-1"
+        eType="#//Section" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Section">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="descriptionText" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iconPath" eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/ImagePath"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" lowerBound="1"
+        eType="#//description/SectionDescription"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedActivities" upperBound="-1"
+        eType="#//Activity" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Activity">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iconPath" eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/ImagePath"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" lowerBound="1"
+        eType="#//description/ActivityDescription"/>
+  </eClassifiers>
+  <eSubpackages name="description" nsURI="http://www.obeonetwork.org/dsl/jarvis/workflow/description"
+      nsPrefix="description">
+    <eClassifiers xsi:type="ecore:EClass" name="WorkflowDescription" eSuperTypes="../../org.eclipse.sirius/model/viewpoint.ecore#//description/Extension ../../org.eclipse.sirius/model/viewpoint.ecore#//description/IdentifiedElement ../../org.eclipse.sirius/model/viewpoint.ecore#//description/DocumentedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="pages" upperBound="-1"
+          eType="#//description/PageDescription" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PageDescription" eSuperTypes="../../org.eclipse.sirius/model/viewpoint.ecore#//description/IdentifiedElement ../../org.eclipse.sirius/model/viewpoint.ecore#//description/DocumentedElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleExpression" lowerBound="1"
+          eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/InterpretedExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="imagePath" eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/ImagePath"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="descriptionExpression"
+          lowerBound="1" eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/InterpretedExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sections" upperBound="-1"
+          eType="#//description/SectionDescription" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SectionDescription" eSuperTypes="../../org.eclipse.sirius/model/viewpoint.ecore#//description/IdentifiedElement ../../org.eclipse.sirius/model/viewpoint.ecore#//description/DocumentedElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="titleExpression" lowerBound="1"
+          eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/InterpretedExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="iconPath" eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/ImagePath"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="descriptionExpression"
+          lowerBound="1" eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/InterpretedExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="activities" upperBound="-1"
+          eType="#//description/ActivityDescription" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ActivityDescription" eSuperTypes="../../org.eclipse.sirius/model/viewpoint.ecore#//description/IdentifiedElement ../../org.eclipse.sirius/model/viewpoint.ecore#//description/DocumentedElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelExpression" lowerBound="1"
+          eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/InterpretedExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="iconPath" eType="ecore:EDataType ../../org.eclipse.sirius/model/viewpoint.ecore#//description/ImagePath"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+          eType="ecore:EClass ../../org.eclipse.sirius/model/viewpoint.ecore#//description/tool/InitialOperation"
+          containment="true"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
