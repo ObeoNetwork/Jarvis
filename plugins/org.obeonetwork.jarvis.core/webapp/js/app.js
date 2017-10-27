@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const getDashboardData = async () => {
-    const response = await fetch('/api/dashboard');
+    const response = await fetch('/api/sessions/ThisIsAGreatSessionID/workflow');
     const data = await response.json();
     return data;
   };
