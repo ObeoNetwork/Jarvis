@@ -42,6 +42,10 @@ public class JarvisAPIServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.getWriter().write("Hello Tony"); //$NON-NLS-1$
+		// TODO Expose meaningful APIs :)
+		String data = "{\"sections\": [{\"title\": \"Capture\"}, {\"title\": \"Analyze\"}]}"; //$NON-NLS-1$
+		resp.setContentType("application/json"); //$NON-NLS-1$
+		resp.setCharacterEncoding("UTF-8"); //$NON-NLS-1$
+		resp.getWriter().write(data);
 	}
 }

@@ -2,9 +2,51 @@
 <html>
   <head>
     <title>Jarvis Dashboard</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/app.js" defer></script>
   </head>
   <body>
-    <h1>Welcome</h1>
-    <p>This is the Jarvis dashboard</p>
+    <nav>
+      <h1>Title</h1>    
+      <ul class="o-breadcrumb">
+        <li class="o-breadcrumb__item">Analyze</li>
+        <li class="o-breadcrumb__item">Define</li>
+        <li class="o-breadcrumb__item">Overview</li>
+      </ul>
+    </nav>
+    
+    <div id="sections" class="o-sections">
+
+      <!--<div class="o-section c-activities">
+        <div class="o-section__header">
+          <h3 class="o-section__title">Capture</h3>
+        </div>
+        <div class="o-section__body">
+          <ul class="c-activities__list">
+            <li class="c-activities__activity">Create a new operational diagram</li>
+          </ul>
+        </div>
+      </div>-->
+
+    </div> <!-- sections -->
+    
+    <div class="o-representations">
+
+      <div class="o-section c-viewer">
+        <div class="o-section__header">
+          <h3 class="o-section__title">Viewer</h3>
+        </div>
+        <div class="o-section__body">
+          <input class="c-viewer__filter" type="text">
+          <ul class="c-viewer__representations">
+            <li class="c-viewer__representation">Component Diagram</li>
+            <li class="c-viewer__representation">Class Diagram</li>
+            <li class="c-viewer__representation">Activity Diagram</li>
+          </ul>
+        </div>
+      </div>
+
+    </div> <!-- representations -->
   </body>
 </html>
