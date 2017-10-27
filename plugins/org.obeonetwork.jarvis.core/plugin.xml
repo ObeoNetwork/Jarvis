@@ -5,9 +5,9 @@
          point="org.obeonetwork.jarvis.server.jarvisServerStaticResourceProvider">
       <descriptor
             class="org.obeonetwork.jarvis.core.internal.JarvisCoreStaticResourceProvider"
-            description="description"
+            description="%JarvisCoreStaticResourceProvider.Description"
             id="org.obeonetwork.jarvis.core.StaticResourceProvider"
-            label="label">
+            label="%JarvisCoreStaticResourceProvider.Label">
       </descriptor>
    </extension>
 
