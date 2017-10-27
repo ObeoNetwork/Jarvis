@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const getDashboardData = async () => {
+  const getWorkflowData = async () => {
     const response = await fetch('/api/sessions/ThisIsAGreatSessionID/workflow');
     const data = await response.json();
     return data;
@@ -43,7 +43,7 @@
     sections.appendChild(section);
   };
   
-  getDashboardData()
+  getWorkflowData()
     .then(data => {
       data.sections.forEach(section => createSection(section));
     })
