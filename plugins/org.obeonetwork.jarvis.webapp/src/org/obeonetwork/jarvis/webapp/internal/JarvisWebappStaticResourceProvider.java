@@ -8,7 +8,7 @@
  * Contributors:
  *    Obeo - initial API and implementation
  *******************************************************************************/
-package org.obeonetwork.jarvis.core.internal;
+package org.obeonetwork.jarvis.webapp.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +22,7 @@ import org.obeonetwork.jarvis.server.api.IJarvisServerStaticResourceProvider;
  *
  * @author sbegaudeau
  */
-public class JarvisCoreStaticResourceProvider implements IJarvisServerStaticResourceProvider {
+public class JarvisWebappStaticResourceProvider implements IJarvisServerStaticResourceProvider {
 
 	/**
 	 * {@inheritDoc}
@@ -31,7 +31,7 @@ public class JarvisCoreStaticResourceProvider implements IJarvisServerStaticReso
 	 */
 	@Override
 	public Optional<InputStream> getResource(String path) {
-		URL entry = JarvisCorePlugin.getPlugin().getBundle().getEntry("/webapp/" + path); //$NON-NLS-1$
+		URL entry = JarvisWebappPlugin.getPlugin().getBundle().getEntry("/webapp/" + path); //$NON-NLS-1$
 		return Optional.ofNullable(entry).flatMap(url -> {
 			try {
 				return Optional.of(url.openStream());
