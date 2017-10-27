@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.obeonetwork.jarvis.server.api.IJarvisServerStaticResource;
 import org.obeonetwork.jarvis.server.api.IJarvisServerStaticResourceProvider;
 
 /**
@@ -67,17 +68,19 @@ public class JarvisResourceServlet extends HttpServlet {
 		String path = req.getPathInfo();
 
 		// @formatter:off
-		Optional<InputStream> optionalInputStream = this.staticResourceProviders.stream()
+		Optional<IJarvisServerStaticResource> optionalStaticResource = this.staticResourceProviders.stream()
 				.map(plugin -> plugin.getResource(path))
 				.filter(Optional::isPresent)
 				.map(Optional::get)
 				.findFirst();
 		// @formatter:on
 
-		if (optionalInputStream.isPresent()) {
-			try (InputStream inputStream = optionalInputStream.get();) {
+		if (optionalStaticResource.isPresent()) {
+			IJarvisServerStaticResource staticResource = optionalStaticResource.get();
+			try (InputStream inputStream = staticResource.openInputStream();) {
 				ByteStreams.copy(inputStream, resp.getOutputStream()); // TODO Remove the dependency to Guava!!!
 			}
+			resp.setContentType(staticResource.getContentType());
 		} else {
 			resp.getWriter().write("Not found"); //$NON-NLS-1$
 		}

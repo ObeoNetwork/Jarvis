@@ -10,11 +10,10 @@
  *******************************************************************************/
 package org.obeonetwork.jarvis.webapp.internal;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.Optional;
 
+import org.obeonetwork.jarvis.server.api.IJarvisServerStaticResource;
 import org.obeonetwork.jarvis.server.api.IJarvisServerStaticResourceProvider;
 
 /**
@@ -30,16 +29,8 @@ public class JarvisWebappStaticResourceProvider implements IJarvisServerStaticRe
 	 * @see org.obeonetwork.jarvis.server.api.IJarvisServerStaticResourceProvider#getResource(java.lang.String)
 	 */
 	@Override
-	public Optional<InputStream> getResource(String path) {
+	public Optional<IJarvisServerStaticResource> getResource(String path) {
 		URL entry = JarvisWebappPlugin.getPlugin().getBundle().getEntry("/webapp/" + path); //$NON-NLS-1$
-		return Optional.ofNullable(entry).flatMap(url -> {
-			try {
-				return Optional.of(url.openStream());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return Optional.empty();
-		});
+		return Optional.ofNullable(entry).map(url -> new JarvisStaticResource(url));
 	}
-
 }

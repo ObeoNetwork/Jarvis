@@ -10,21 +10,30 @@
  *******************************************************************************/
 package org.obeonetwork.jarvis.server.api;
 
-import java.util.Optional;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
- * Interface used to contribute static resources to the server.
+ * The static resource is defined by its content and its content type.
  *
  * @author sbegaudeau
  */
-public interface IJarvisServerStaticResourceProvider {
+public interface IJarvisServerStaticResource {
+
 	/**
-	 * Returns an optional containing the resource for the given path if the plugin can handle it or an empty optional
-	 * otherwise.
+	 * The content type.
 	 *
-	 * @param path
-	 *            The path of the resource requested
-	 * @return An optional with the resource if it exists
+	 * @return The content type
 	 */
-	Optional<IJarvisServerStaticResource> getResource(String path);
+	String getContentType();
+
+	/**
+	 * The input stream.
+	 *
+	 * @return The input stream
+	 *
+	 * @exception IOException
+	 *                In case of errors while trying to open the input stream
+	 */
+	InputStream openInputStream() throws IOException;
 }
