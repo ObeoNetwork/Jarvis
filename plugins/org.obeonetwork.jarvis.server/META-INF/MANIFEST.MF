@@ -16,4 +16,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Export-Package: org.obeonetwork.jarvis.server.api;version="1.0.0",
- org.obeonetwork.jarvis.server.internal;version="1.0.0";x-internal:=true
+ org.obeonetwork.jarvis.server.internal;version="1.0.0";x-internal:=true,
+ org.obeonetwork.jarvis.server.internal.extensions;version="1.0.0";x-internal:=true
