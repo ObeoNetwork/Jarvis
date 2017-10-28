@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description>
+      To install these features, point Eclipse at this site.
+   </description>
+   <feature url="features/org.obeonetwork.jarvis.feature_1.0.0.qualifier.jar" id="org.obeonetwork.jarvis.feature" version="1.0.0.qualifier">
+      <category name="Jarvis"/>
+   </feature>
+   <category-def name="Jarvis" label="Jarvis">
+      <description>
+         Update site of the Jarvis project
+      </description>
+   </category-def>
+</site>
