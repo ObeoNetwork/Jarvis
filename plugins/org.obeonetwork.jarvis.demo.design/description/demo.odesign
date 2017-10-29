@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.obeonetwork.org/dsl/jarvis/workflow/description" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" name="demo" version="12.0.0.2017041100">
+  <ownedViewpoints name="Sample Viewpoint">
+    <ownedJavaExtensions qualifiedClassName="org.obeonetwork.jarvis.demo.design.Services"/>
+  </ownedViewpoints>
+  <extensions xsi:type="description_1:WorkflowDescription" name="jarvis.demo">
+    <pages name="demo" titleExpression="Demo" descriptionExpression="This is a first demonstration of &lt;a href=&quot;https://github.com/ObeoNetwork/Jarvis&quot;>Jarvis&lt;/a> in action.">
+      <sections titleExpression="Presentation" descriptionExpression="First things first, make the presentations.">
+        <activities labelExpression="Hi">
+          <operation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.jarvisSays('Hello, Tony')"/>
+          </operation>
+        </activities>
+      </sections>
+    </pages>
+  </extensions>
+</description:Group>

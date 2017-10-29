@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!-- Start of user code plugin.xml start specifics  -->
+<!--
+   Copyright (c) 2017 Obeo.
+   All rights reserved. This program and the accompanying materials
+   are made available under the terms of the Eclipse Public License v1.0
+   which accompanies this distribution, and is available at
+   http://www.eclipse.org/legal/epl-v10.html
+   
+   Contributors:
+      Obeo - initial API and implementation
+
+-->
+
+<plugin>
+ <!-- End of user code plugin.xml start specifics  -->
+  
+  <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+    <propertySections contributorId="org.eclipse.sirius.editor.editorPlugin.SiriusEditorContributor">
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.description.activitydescription.ActivityDescriptionIconPathPropertySection"
+               id="description.section.activityDescription.IconPath"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.description.activitydescription.ActivityDescriptionIconPathFilter"
+               afterSection="description.section.documentedElement.Documentation"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.description.ActivityDescription"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.description.activitydescription.ActivityDescriptionLabelExpressionPropertySection"
+               id="description.section.activityDescription.LabelExpression"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.description.activitydescription.ActivityDescriptionLabelExpressionFilter"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.description.ActivityDescription"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.description.sectiondescription.SectionDescriptionIconPathPropertySection"
+               id="description.section.sectionDescription.IconPath"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.description.sectiondescription.SectionDescriptionIconPathFilter"
+               afterSection="description.section.documentedElement.Documentation"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.description.SectionDescription"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.description.sectiondescription.SectionDescriptionDescriptionExpressionPropertySection"
+               id="description.section.sectionDescription.DescriptionExpression"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.description.sectiondescription.SectionDescriptionDescriptionExpressionFilter"
+               afterSection="description.section.sectionDescription.TitleExpression"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.description.SectionDescription"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.description.sectiondescription.SectionDescriptionTitleExpressionPropertySection"
+               id="description.section.sectionDescription.TitleExpression"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.description.sectiondescription.SectionDescriptionTitleExpressionFilter"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.description.SectionDescription"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.description.pagedescription.PageDescriptionImagePathPropertySection"
+               id="description.section.pageDescription.ImagePath"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.description.pagedescription.PageDescriptionImagePathFilter"
+               afterSection="description.section.documentedElement.Documentation"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.description.PageDescription"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.description.pagedescription.PageDescriptionDescriptionExpressionPropertySection"
+               id="description.section.pageDescription.DescriptionExpression"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.description.pagedescription.PageDescriptionDescriptionExpressionFilter"
+               afterSection="description.section.pageDescription.TitleExpression"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.description.PageDescription"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.description.pagedescription.PageDescriptionTitleExpressionPropertySection"
+               id="description.section.pageDescription.TitleExpression"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.description.pagedescription.PageDescriptionTitleExpressionFilter"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.description.PageDescription"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.workflow.activity.ActivityIconPathPropertySection"
+               id="workflow.section.activity.IconPath"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.workflow.activity.ActivityIconPathFilter"
+               afterSection="workflow.section.activity.Label"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.Activity"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.workflow.activity.ActivityLabelPropertySection"
+               id="workflow.section.activity.Label"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.workflow.activity.ActivityLabelFilter"
+               afterSection="workflow.section.activity.Description"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.Activity"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.workflow.activity.ActivityDescriptionPropertySection"
+               id="workflow.section.activity.Description"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.workflow.activity.ActivityDescriptionFilter"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.Activity"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.workflow.section.SectionIconPathPropertySection"
+               id="workflow.section.section.IconPath"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.workflow.section.SectionIconPathFilter"
+               afterSection="workflow.section.section.Description"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.Section"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.workflow.section.SectionDescriptionPropertySection"
+               id="workflow.section.section.Description"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.workflow.section.SectionDescriptionFilter"
+               afterSection="workflow.section.section.DescriptionText"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.Section"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.workflow.section.SectionDescriptionTextPropertySection"
+               id="workflow.section.section.DescriptionText"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.workflow.section.SectionDescriptionTextFilter"
+               afterSection="workflow.section.section.Title"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.Section"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.workflow.section.SectionTitlePropertySection"
+               id="workflow.section.section.Title"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.workflow.section.SectionTitleFilter"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.Section"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.workflow.page.PageImagePathPropertySection"
+               id="workflow.section.page.ImagePath"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.workflow.page.PageImagePathFilter"
+               afterSection="workflow.section.page.Description"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.Page"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.workflow.page.PageDescriptionPropertySection"
+               id="workflow.section.page.Description"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.workflow.page.PageDescriptionFilter"
+               afterSection="workflow.section.page.DescriptionText"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.Page"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.workflow.page.PageDescriptionTextPropertySection"
+               id="workflow.section.page.DescriptionText"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.workflow.page.PageDescriptionTextFilter"
+               afterSection="workflow.section.page.Title"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.Page"/>
+      </propertySection>
+  	  <propertySection
+               class="org.obeonetwork.jarvis.workflow.model.editor.properties.sections.workflow.page.PageTitlePropertySection"
+               id="workflow.section.page.Title"
+               filter="org.obeonetwork.jarvis.workflow.model.editor.properties.filters.workflow.page.PageTitleFilter"
+                tab="viewpoint.tab.general">
+        <input type="org.obeonetwork.jarvis.workflow.Page"/>
+      </propertySection>
+  	<!-- Start of user code propertySections of org.eclipse.sirius.editor.editorPlugin.SiriusEditorContributor  -->
+  	
+  	<!-- End of user code propertySections of org.eclipse.sirius.editor.editorPlugin.SiriusEditorContributor  -->
+    </propertySections>
+  </extension>
+
+<!-- Start of user code plugin.xml end specifics  -->
+
+  <extension point="org.eclipse.help.contexts">
+     <contexts file="help/contexts.xml" plugin="org.obeonetwork.jarvis.workflow.model">
+     </contexts>
+  </extension>
+  
+</plugin>    
+<!-- End of user code plugin.xml end specifics  -->

@@ -1,0 +1,7 @@
+target "jarvis" with source, requirements
+
+include "http://download.eclipse.org/sirius/updates/nightly/targets/sirius_oxygen.targetplatform"
+
+location Orbit "http://download.eclipse.org/tools/orbit/downloads/drops/R20170818183741/repository" {
+    com.google.gson lazy
+}

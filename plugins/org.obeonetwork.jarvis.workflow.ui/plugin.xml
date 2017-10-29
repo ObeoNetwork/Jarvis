@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension point="org.eclipse.sirius.ui.editor.sessionEditorPageProvider">
+      <pageProvider class="org.obeonetwork.jarvis.workflow.ui.WorkflowPageProvider" />
+   </extension>
+   <extension point="org.obeonetwork.jarvis.server.jarvisServerStaticResourceProvider">
+   <descriptor class="org.obeonetwork.jarvis.workflow.ui.WorkflowStaticResourceProvider"
+         description="%workflow.staticResourceProvider.label"
+         id="org.obeonetwork.jarvis.core.StaticResourceProvider"
+         label="%workflow.staticResourceProvider.label">
+   </descriptor>
+</extension>
+   
+</plugin>
