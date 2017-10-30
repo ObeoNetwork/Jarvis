@@ -2,6 +2,10 @@ target "jarvis" with source, requirements
 
 include "http://download.eclipse.org/sirius/updates/nightly/targets/sirius_oxygen.targetplatform"
 
+location Sirius-Oxygen-Master "http://download.eclipse.org/sirius/updates/nightly/5.1.x/oxygen/" {
+    org.eclipse.sirius.runtime.feature.group lazy
+}
+
 location Orbit "http://download.eclipse.org/tools/orbit/downloads/drops/R20170818183741/repository" {
     com.google.gson lazy
 }
