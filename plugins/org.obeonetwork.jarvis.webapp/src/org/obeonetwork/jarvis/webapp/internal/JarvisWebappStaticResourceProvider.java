@@ -26,14 +26,29 @@ import org.obeonetwork.jarvis.server.api.IJarvisServerStaticResourceProvider;
 public class JarvisWebappStaticResourceProvider implements IJarvisServerStaticResourceProvider {
 
 	/**
-	 * The segment for the sessions.
+	 * The segment for the favicon.
 	 */
-	private static final String SESSIONS = "sessions"; //$NON-NLS-1$
+	private static final String FAVICON = "favicon.ico"; //$NON-NLS-1$
 
 	/**
-	 * The segment for the pages of the workflow.
+	 * The segment for the manifest.json.
 	 */
-	private static final String PAGES = "pages"; //$NON-NLS-1$
+	private static final String MANIFEST_JSON = "manifest.json"; //$NON-NLS-1$
+
+	/**
+	 * The segment for the asset-manifest.json.
+	 */
+	private static final String ASSET_MANIFEST_JSON = "asset-manifest.json"; //$NON-NLS-1$
+
+	/**
+	 * The segment for the static assets.
+	 */
+	private static final String STATIC = "static"; //$NON-NLS-1$
+
+	/**
+	 * The segment for the API.
+	 */
+	private static final String API = "api"; //$NON-NLS-1$
 
 	/**
 	 * {@inheritDoc}
@@ -45,39 +60,22 @@ public class JarvisWebappStaticResourceProvider implements IJarvisServerStaticRe
 		List<String> segments = Arrays.asList(path.split("/")); //$NON-NLS-1$
 
 		Optional<URL> entry = Optional.empty();
-		if (this.isWorkflow(segments)) {
-			URL url = JarvisWebappPlugin.getPlugin().getBundle().getEntry("/webapp/workflow.html"); //$NON-NLS-1$
+		if (segments.size() > 2 && FAVICON.equals(segments.get(1))) {
+			URL url = JarvisWebappPlugin.getPlugin().getBundle().getEntry("/webapp/build/favicon.ico"); //$NON-NLS-1$
 			entry = Optional.ofNullable(url);
-		} else if (this.isPage(segments)) {
-			URL url = JarvisWebappPlugin.getPlugin().getBundle().getEntry("/webapp/page.html"); //$NON-NLS-1$
+		} else if (segments.size() > 2 && MANIFEST_JSON.equals(segments.get(1))) {
+			URL url = JarvisWebappPlugin.getPlugin().getBundle().getEntry("/webapp/build/manifest.json"); //$NON-NLS-1$
 			entry = Optional.ofNullable(url);
-		} else {
-			URL url = JarvisWebappPlugin.getPlugin().getBundle().getEntry("/webapp/" + path); //$NON-NLS-1$
+		} else if (segments.size() > 2 && ASSET_MANIFEST_JSON.equals(segments.get(1))) {
+			URL url = JarvisWebappPlugin.getPlugin().getBundle().getEntry("/webapp/build/asset-manifest.json"); //$NON-NLS-1$
+			entry = Optional.ofNullable(url);
+		} else if (segments.size() > 2 && STATIC.equals(segments.get(1))) {
+			URL url = JarvisWebappPlugin.getPlugin().getBundle().getEntry("/webapp/build" + path); //$NON-NLS-1$
+			entry = Optional.ofNullable(url);
+		} else if (!(segments.size() > 2 && API.equals(segments.get(1)))) {
+			URL url = JarvisWebappPlugin.getPlugin().getBundle().getEntry("/webapp/build/index.html"); //$NON-NLS-1$
 			entry = Optional.ofNullable(url);
 		}
 		return entry.map(url -> new JarvisStaticResource(url));
 	}
-
-	/**
-	 * Indicates if the resource expected is the HTML document for the workflow.
-	 *
-	 * @param segments
-	 *            The segments of the path of the request
-	 * @return <code>true</code> if it matches the path of the workflow, <code>false</code> otherwise
-	 */
-	private boolean isWorkflow(List<String> segments) {
-		return segments.size() == 3 && SESSIONS.equals(segments.get(1));
-	}
-
-	/**
-	 * Indicates if the resource expected is the HTML document for a page of the workflow.
-	 *
-	 * @param segments
-	 *            The segments of the path of the request
-	 * @return <code>true</code> if it matches the path of a page of the workflow, <code>false</code> otherwise
-	 */
-	private boolean isPage(List<String> segments) {
-		return segments.size() == 5 && SESSIONS.equalsIgnoreCase(segments.get(1)) && PAGES.equalsIgnoreCase(segments.get(3));
-	}
-
 }

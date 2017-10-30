@@ -52,6 +52,14 @@ public class JarvisStaticResource implements IJarvisServerStaticResource {
 			contentType = "text/css"; //$NON-NLS-1$
 		} else if (this.url.toString().endsWith(".js")) { //$NON-NLS-1$
 			contentType = "application/javascript"; //$NON-NLS-1$
+		} else if (this.url.toString().endsWith(".svg")) { //$NON-NLS-1$
+			contentType = "image/svg+xml"; //$NON-NLS-1$
+		} else if (this.url.toString().endsWith(".jpg") || this.url.toString().endsWith("jpeg")) { //$NON-NLS-1$//$NON-NLS-2$
+			contentType = "image/jpeg"; //$NON-NLS-1$
+		} else if (this.url.toString().endsWith(".ico")) { //$NON-NLS-1$
+			contentType = "image/x-icon"; //$NON-NLS-1$
+		} else if (this.url.toString().endsWith(".json")) { //$NON-NLS-1$
+			contentType = "application/json"; //$NON-NLS-1$
 		}
 		return contentType;
 	}

@@ -1,0 +1,65 @@
+html {
+  --main-color: rgba(0, 0, 0, 0.87);
+  --main-bg-color: #EEEEEE;
+  --main-link-color: #2196f3;
+
+  font-size: 13px;
+  font-family: 'OpenSans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  color: var(--main-color);
+  background-color: var(--main-bg-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+[role="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button {
+  box-sizing: content-box;
+}
+
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button {
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  -webkit-appearance: button; /* for input */
+  -webkit-user-select: none; /* for button */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+a, a:visited, a:hover {
+  color: var(--main-link-color);
+  text-decoration: none;
+}

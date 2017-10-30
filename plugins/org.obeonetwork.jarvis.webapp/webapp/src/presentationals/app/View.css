@@ -1,0 +1,49 @@
+.view-title {
+  margin: 0rem 0rem 1rem 0rem;
+  font-size: 1.3rem;
+}
+
+/************************************
+ * PHONE
+ ************************************/
+@media (max-width: 349px) {
+  .view {
+    padding: 2rem 1rem 2rem 1rem;
+  }
+}
+
+/************************************
+ * SMARTPHONE
+ ************************************/
+@media (min-width: 350px) {
+  .view {
+    padding: 3rem 2rem 3rem 2rem;
+  }
+}
+
+/************************************
+ * TABLET
+ ************************************/
+@media (min-width: 600px) {
+  .view {
+    padding: 3rem 4rem 3rem 4rem;
+  }
+}
+
+/************************************
+ * DESKTOP
+ ************************************/
+@media (min-width: 900px) {
+  .view {
+    padding: 3rem 6rem 3rem 6rem;
+  }
+}
+
+/************************************
+ * LARGE DESKTOP
+ ************************************/
+@media (min-width: 1200px) {
+  .view {
+    padding: 4rem 10rem 0rem 10rem;
+  }
+}

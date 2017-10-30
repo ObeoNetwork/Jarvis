@@ -1,0 +1,64 @@
+.workflow-page-view__container {
+  display: grid;
+  grid-row-gap: 2em;
+  grid-column-gap: 2em;
+
+  padding: 2rem 0rem 0rem 0rem;
+}
+
+.workflow-page-view__sections {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto-fill, min-content);
+  grid-row-gap: 2em;
+}
+
+/************************************
+ * PHONE
+ ************************************/
+@media (max-width: 349px) {
+  .workflow-page-view__container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+/************************************
+ * SMARTPHONE
+ ************************************/
+@media (min-width: 350px) {
+  .workflow-page-view__container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+/************************************
+ * TABLET
+ ************************************/
+@media (min-width: 600px) {
+  .workflow-page-view__container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+  }
+}
+
+/************************************
+ * DESKTOP
+ ************************************/
+@media (min-width: 900px) {
+  .workflow-page-view__container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+  }
+}
+
+/************************************
+ * LARGE DESKTOP
+ ************************************/
+@media (min-width: 1200px) {
+  .workflow-page-view__container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+  }
+}

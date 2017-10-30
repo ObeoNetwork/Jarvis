@@ -1,0 +1,53 @@
+.sessions-view__container {
+  display: grid;
+  grid-template-rows: repeat(auto-fill, min-content);
+  grid-row-gap: 2em;
+  grid-column-gap: 2em;
+
+  padding: 2rem 0rem 0rem 0rem;
+}
+
+/************************************
+ * PHONE
+ ************************************/
+@media (max-width: 349px) {
+  .sessions-view__container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/************************************
+ * SMARTPHONE
+ ************************************/
+@media (min-width: 350px) {
+  .sessions-view__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/************************************
+ * TABLET
+ ************************************/
+@media (min-width: 600px) {
+  .sessions-view__container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/************************************
+ * DESKTOP
+ ************************************/
+@media (min-width: 900px) {
+  .sessions-view__container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/************************************
+ * LARGE DESKTOP
+ ************************************/
+@media (min-width: 1200px) {
+  .sessions-view__container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
