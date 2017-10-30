@@ -1,4 +1,11 @@
 language: java
 jdk: oraclejdk8
 script:
+  - pwd
+  - cd plugins/org.obeonetwork.jarvis.webapp/webapp
+  - pwd
+  - yarn install
+  - yarn build
+  - cd ../../../
+  - pwd
   - mvn clean verify -f releng/org.obeonetwork.jarvis.releng.parent/pom.xml
