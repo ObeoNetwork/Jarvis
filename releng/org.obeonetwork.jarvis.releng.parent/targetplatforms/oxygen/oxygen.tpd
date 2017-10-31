@@ -8,4 +8,8 @@ location Sirius-Oxygen-Master "http://download.eclipse.org/sirius/updates/nightl
 
 location Orbit "http://download.eclipse.org/tools/orbit/downloads/drops/R20170818183741/repository" {
     com.google.gson lazy
+    org.slf4j.api [1.7.2,1.7.3)
+    ch.qos.logback.slf4j [1.0.7,1.0.8)
+    ch.qos.logback.classic [1.0.7,1.0.8)
+    ch.qos.logback.core [1.0.7,1.0.8)
 }
