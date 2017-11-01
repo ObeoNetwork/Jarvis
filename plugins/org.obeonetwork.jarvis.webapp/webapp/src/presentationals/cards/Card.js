@@ -1,56 +1,72 @@
 import React from 'react';
 
+import { classNames } from '../../common/utils';
+
 import './Card.css';
 
 const Card = (props) => {
   return (
-    <div className={`card ${props.className}`}>
+    <div className={classNames('card', props.className)}>
       {props.children}
     </div>
   );
 };
 
-const Divider = () => <div className={`card__divider`}></div>;
+const Divider = (props) => <div className={classNames('card__divider', props.className)}></div>;
 
 const Header = (props) => {
   return (
-    <div className={`card__header`}>
+    <div className={classNames('card__header', props.className)}>
       {props.children}
     </div>
   );
 };
 
 const Title = (props) => {
-  return <h4 className={`card__title`}>{props.children}</h4>;
+  return <h1 className={classNames('card__title', props.className)}>{props.children}</h1>;
+};
+
+const Subtitle = (props) => {
+  return <h2 className={classNames('card__subtitle', props.className)}>{props.children}</h2>;
 };
 
 const Body = (props) => {
   return (
-    <div className={`card__body`}>
+    <div className={classNames('card__body', props.className)}>
       {props.children}
     </div>
   );
 };
 
-const List = (props) => <div className={`card__list`}>{props.children}</div>;
+const List = (props) => <div className={classNames('card__list', props.className)}>{props.children}</div>;
 
-const Item = (props) => <div className={`card__list__item`}>{props.children}</div>;
+const Item = (props) => <div className={classNames('card__list__item', props.className)}>{props.children}</div>;
 
 const Footer = (props) => {
   return (
-    <div className={`card__footer`}>
+    <div className={classNames('card__footer', props.className)}>
       {props.children}
     </div>
+  );
+};
+
+const Action = (props) => {
+  return (
+    <button className={classNames('card__action', props.className)} onClick={props.handleClick}>
+      {props.children}
+    </button>
   );
 };
 
 export {
+  Action,
+  Body,
   Card,
   Divider,
+  Footer,
   Header,
   Item,
   List,
-  Title,
-  Body,
-  Footer
+  Subtitle,
+  Title
 };

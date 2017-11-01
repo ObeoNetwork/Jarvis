@@ -1,6 +1,6 @@
 .session-card {
   color: white;
-  background-color: #009db5;
+  background-color: var(--main-color);
 }
 
 .session-card .card__body {

@@ -24,15 +24,22 @@ class SessionsViewContainer extends Component {
           sessions: jsonResponse.sessions
         }
       }))
-      .catch(error => console.warn(error));
+      .catch(error => this.setState((prevState, props) => {
+        return {
+          isLoading: false,
+          error: 'The page has not been properly loaded due to an error with the server.'
+        }
+      }));
   }
 
   render() {
+    let body;
     if (this.state.isLoading) {
-      return <p>Loading...</p>;
-    }
-    return (
-      <View className='sessions-view' title="Sessions">
+      body = <p>Loading...</p>;
+    } else if (this.state.error) {
+      body = <p>{this.state.error}</p>
+    } else {
+      body = (
         <div className='sessions-view__container'>
           {Object.entries(this.state.sessions).map(sessionEntry => {
             return (
@@ -42,6 +49,11 @@ class SessionsViewContainer extends Component {
             );
           })}
         </div>
+      );
+    }
+    return (
+      <View className='sessions-view' title="Sessions">
+        {body}
       </View>
     );
   }

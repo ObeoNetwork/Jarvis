@@ -40,7 +40,7 @@ class WorkflowPageViewContainer extends Component {
       return <p>Loading...</p>;
     }
     return (
-      <View className='workflow-page-view' title="Workflow Page">
+      <View className='workflow-page-view' title={this.state.page.title}>
         <Link to={`/sessions/${this.props.match.params.sessionId}/workflow`}>Back to the workflow</Link>
         <div className='workflow-page-view__container'>
           <div className='workflow-page-view__sections'>

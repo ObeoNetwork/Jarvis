@@ -2,8 +2,6 @@
   display: grid;
   grid-row-gap: 2em;
   grid-column-gap: 2em;
-
-  padding: 2rem 0rem 0rem 0rem;
 }
 
 .workflow-page-view__sections {

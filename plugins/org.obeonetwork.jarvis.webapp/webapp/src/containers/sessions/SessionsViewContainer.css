@@ -3,8 +3,6 @@
   grid-template-rows: repeat(auto-fill, min-content);
   grid-row-gap: 2em;
   grid-column-gap: 2em;
-
-  padding: 2rem 0rem 0rem 0rem;
 }
 
 /************************************

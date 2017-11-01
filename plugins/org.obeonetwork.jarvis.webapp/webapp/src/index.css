@@ -1,30 +1,49 @@
-html {
-  --main-color: rgba(0, 0, 0, 0.87);
-  --main-bg-color: #EEEEEE;
-  --main-link-color: #2196f3;
-
-  font-size: 13px;
-  font-family: 'OpenSans', sans-serif;
-  -webkit-font-smoothing: antialiased;
+/************************************
+ * RESET
+ ************************************/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
 }
-
+:focus {
+	outline: 0;
+}
 body {
-  margin: 0;
-  padding: 0;
-
-  color: var(--main-color);
-  background-color: var(--main-bg-color);
+	line-height: 1;
+	color: black;
+	background: white;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin: 0;
-  padding: 0;
+ol, ul {
+	list-style: none;
+}
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+caption, th, td {
+	text-align: left;
+	font-weight: normal;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: "";
+}
+blockquote, q {
+	quotes: "" "";
 }
 
 [role="button"],
@@ -59,7 +78,48 @@ button::-moz-focus-inner {
   padding: 0;
 }
 
+/************************************
+ * APP STYLE
+ ************************************/
+
+html {
+  --text-color: hsla(0, 0, 0, 0.87);
+
+  --bg-color: hsl(0, 0%, 93%);
+
+  --main-color: hsl(206.1, 79.3%, 52.7%);
+  --main-color-dark: hsl(206.1, 79.3%, 45%);
+  --main-color-darker: hsl(206.1, 79.3%, 35%);
+
+  font-size: 13px;
+  font-family: 'OpenSans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
 a, a:visited, a:hover {
-  color: var(--main-link-color);
+  color: inherit;
   text-decoration: none;
+}
+
+button {
+  background-color: var(--main-color);
+  color: hsl(0, 0%, 100%);
+  border-radius: 2px;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 10px 16px;
+}
+
+button:hover{
+  background-color: var(--main-color-dark);
+}
+button:active{
+  background-color: var(--main-color-darker);
 }
