@@ -45,6 +45,6 @@
  ************************************/
 @media (min-width: 1200px) {
   .view {
-    padding: 4rem 10rem 0rem 10rem;
+    padding: 4rem 10rem 4rem 10rem;
   }
 }
