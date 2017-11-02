@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { Body, Card, Divider, Header, ItemIcon, Item, ItemText, List, Title } from "../cards/Card";
-
-import executeImage from './execute.svg';
+import { Body, Card, Divider, Header, ItemSvgIcon, Item, ItemText, List, Title } from "../cards/Card";
 
 import './WorkflowSectionCard.css';
 
@@ -19,7 +17,9 @@ const WorkflowSectionCard = (props) => {
             return (
               <Item key={activityEntry[0]}>
                 <ItemText>{activityEntry[1].title}</ItemText>
-                <ItemIcon src={executeImage} alt='Execute the action'/>
+                <ItemSvgIcon>
+                  <path d="M50,5C25.1,5,5,25.1,5,50c0,24.9,20.1,45,45,45s45-20.1,45-45C95,25.1,74.9,5,50,5z M38.8,69.5v-39L72.5,50L38.8,69.5z"/>
+                </ItemSvgIcon>
               </Item>
             );
           })}

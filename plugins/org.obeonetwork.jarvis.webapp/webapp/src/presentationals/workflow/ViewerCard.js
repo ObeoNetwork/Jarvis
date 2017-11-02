@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Card, Body, Header, List, Item, ItemText, Title } from "../cards/Card";
+import { Card, Body, Divider, Header, List, Item, ItemText, Title } from "../cards/Card";
 
 const ViewerCard = (props) => {
   return (
@@ -8,6 +8,7 @@ const ViewerCard = (props) => {
       <Header>
         <Title>Representations Viewer</Title>
       </Header>
+      <Divider/>
       <Body>
         <List>
           <Item><ItemText>Capture</ItemText></Item>
