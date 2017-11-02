@@ -32,8 +32,20 @@
   line-height: 1rem;
 }
 
-.card__list__item {
+.card__item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.card__item__text {
   padding: 16px 0px 16px 0px;
+}
+
+.card__item__icon {
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
 }
 
 .card__footer {

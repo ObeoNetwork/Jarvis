@@ -40,7 +40,15 @@ const Body = (props) => {
 
 const List = (props) => <div className={classNames('card__list', props.className)}>{props.children}</div>;
 
-const Item = (props) => <div className={classNames('card__list__item', props.className)}>{props.children}</div>;
+const Item = (props) => <div className={classNames('card__item', props.className)}>{props.children}</div>
+
+const ItemText = (props) => <div className={classNames('card__item__text', props.className)}>{props.children}</div>;
+
+const ItemIcon = (props) => {
+  return (
+    <img className={classNames('card__item__icon', props.className)} src={props.src} alt={props.alt} />
+  );
+};
 
 const Footer = (props) => {
   return (
@@ -66,6 +74,8 @@ export {
   Footer,
   Header,
   Item,
+  ItemIcon,
+  ItemText,
   List,
   Subtitle,
   Title

@@ -17,7 +17,7 @@ class WorkflowViewContainer extends Component {
     this.setState((prevState, props) => {
       return {
         isLoading: false,
-        sessionId: 'test',
+        sessionId: props.match.params.sessionId,
         workflow: {
           pages: [
             { pageId: 1, title: 'Overview', description: 'Experiential agile human-centered design earned media prototype user centered design pivot Steve Jobs physical computing disrupt fund user centered design engaging. 360 campaign responsive intuitive user centered design venture capital iterate agile. Bootstrapping thought leader big data SpaceTeam responsive convergence big data user story unicorn pitch deck. Entrepreneur quantitative vs. qualitative co-working SpaceTeam thinker-maker-doer co-working thought leader paradigm physical computing.' },

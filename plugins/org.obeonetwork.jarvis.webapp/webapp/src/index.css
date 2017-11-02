@@ -91,9 +91,9 @@ html {
   --main-color-dark: hsl(206.1, 79.3%, 45%);
   --main-color-darker: hsl(206.1, 79.3%, 35%);
 
-  font-size: 13px;
+  font-size: 14px;
   font-family: 'OpenSans', sans-serif;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 body {

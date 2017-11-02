@@ -13,7 +13,7 @@ class WorkflowPageCard extends Component {
 
   render() {
     return (
-      <Card className="workflow-page-card">
+      <Card className='workflow-page-card'>
         <Header>
           <Title>{this.props.page.title}</Title>
           <Subtitle>Workflow</Subtitle>
