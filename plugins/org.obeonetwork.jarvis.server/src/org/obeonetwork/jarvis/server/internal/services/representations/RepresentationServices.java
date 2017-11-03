@@ -10,13 +10,20 @@
  *******************************************************************************/
 package org.obeonetwork.jarvis.server.internal.services.representations;
 
+import com.google.common.io.BaseEncoding;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.sirius.business.api.dialect.DialectManager;
+import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.CreateRepresentationDto;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.RepresentationDto;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.RepresentationsDto;
+import org.obeonetwork.jarvis.server.internal.services.session.SessionServices;
 
 /**
  * The service class for the representations.
@@ -34,7 +41,13 @@ public class RepresentationServices {
 	 */
 	public RepresentationsDto getRepresentations(String sessionId) {
 		List<RepresentationDto> representations = new ArrayList<>();
-		// TODO compute the representations
+		new SessionServices().findSessionByID(sessionId).ifPresent(s -> {
+			for (DRepresentationDescriptor descriptor : DialectManager.INSTANCE.getAllRepresentationDescriptors(s)) {
+				URI uri = EcoreUtil.getURI(descriptor);
+				RepresentationDto dto = new RepresentationDto(BaseEncoding.base64().encode(uri.toString().getBytes()), descriptor.getName());
+				representations.add(dto);
+			}
+		});
 		return new RepresentationsDto(representations);
 	}
 
