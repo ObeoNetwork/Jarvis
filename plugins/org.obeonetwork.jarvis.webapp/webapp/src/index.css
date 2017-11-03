@@ -84,12 +84,18 @@ button::-moz-focus-inner {
 
 html {
   --text-color: hsla(0, 0, 0, 0.87);
+  --text-alternate-color: hsl(180, 1%, 61%);
 
   --bg-color: hsl(0, 0%, 93%);
 
   --main-color: hsl(206.1, 79.3%, 52.7%);
   --main-color-dark: hsl(206.1, 79.3%, 45%);
   --main-color-darker: hsl(206.1, 79.3%, 35%);
+  --main-text-color: hsl(220, 27%, 98%);
+
+  --success-color: hsl(156, 40%, 63%);
+  --success-color-dark: hsl(156, 40%, 45%);
+  --success-color-darker: hsl(156, 40%, 35%);
 
   font-size: 14px;
   font-family: 'OpenSans', sans-serif;
@@ -108,10 +114,10 @@ a, a:visited, a:hover {
 
 button {
   background-color: var(--main-color);
-  color: hsl(0, 0%, 100%);
+  color: var(--main-text-color);
   border-radius: 2px;
   font-size: 0.875rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08rem;
   text-transform: uppercase;
   font-weight: bold;
   padding: 10px 16px;
