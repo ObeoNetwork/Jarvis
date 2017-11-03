@@ -10,14 +10,12 @@
  *******************************************************************************/
 package org.obeonetwork.jarvis.server.internal.dtos.workflow;
 
-import java.util.List;
-
 /**
- * The page.
+ * A simple version of the page.
  *
  * @author sbegaudeau
  */
-public class PageDto {
+public class SimplePageDto {
 	/**
 	 * The identifier of the page.
 	 */
@@ -34,21 +32,6 @@ public class PageDto {
 	private String description;
 
 	/**
-	 * The identifier of the previous page.
-	 */
-	private String previousPageId;
-
-	/**
-	 * The identifier of the next page.
-	 */
-	private String nextPageId;
-
-	/**
-	 * The sections.
-	 */
-	private List<SectionDto> sections;
-
-	/**
 	 * The constructor.
 	 * 
 	 * @param pageId
@@ -57,17 +40,10 @@ public class PageDto {
 	 *            The label
 	 * @param description
 	 *            The description
-	 * @param previousPageId
-	 *            The identifier of the previous page
-	 * @param nextPageId
-	 *            The identifier of the next page
-	 * @param sections
-	 *            The sections
 	 */
-	public PageDto(String pageId, String label, String description, String previousPageId, String nextPageId, List<SectionDto> sections) {
+	public SimplePageDto(String pageId, String label, String description) {
 		this.label = label;
 		this.description = description;
-		this.sections = sections;
 	}
 
 	/**
@@ -95,32 +71,5 @@ public class PageDto {
 	 */
 	public String getDescription() {
 		return this.description;
-	}
-
-	/**
-	 * Return the previousPageId.
-	 *
-	 * @return the previousPageId
-	 */
-	public String getPreviousPageId() {
-		return this.previousPageId;
-	}
-
-	/**
-	 * Return the nextPageId.
-	 *
-	 * @return the nextPageId
-	 */
-	public String getNextPageId() {
-		return this.nextPageId;
-	}
-
-	/**
-	 * Return the sections.
-	 *
-	 * @return the sections
-	 */
-	public List<SectionDto> getSections() {
-		return this.sections;
 	}
 }

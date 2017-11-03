@@ -8,37 +8,37 @@
  * Contributors:
  *    Obeo - initial API and implementation
  *******************************************************************************/
-package org.obeonetwork.jarvis.server.internal.dtos.workflow;
+package org.obeonetwork.jarvis.server.internal.dtos.representations;
 
 import java.util.List;
 
 /**
- * The workflow.
+ * The main DTO for the representations.
  *
  * @author sbegaudeau
  */
-public class WorkflowDto {
+public class RepresentationsDto {
 	/**
-	 * The pages of the workflow.
+	 * The representations.
 	 */
-	private List<SimplePageDto> pages;
+	private List<RepresentationDto> representations;
 
 	/**
 	 * The constructor.
-	 *
-	 * @param pages
-	 *            The pages of the workflow
+	 * 
+	 * @param representations
+	 *            The representations
 	 */
-	public WorkflowDto(List<SimplePageDto> pages) {
-		this.pages = pages;
+	public RepresentationsDto(List<RepresentationDto> representations) {
+		this.representations = representations;
 	}
 
 	/**
-	 * Return the pages of the workflow.
+	 * Return the representations.
 	 *
-	 * @return the pages of the workflow
+	 * @return the representations
 	 */
-	public List<SimplePageDto> getPages() {
-		return this.pages;
+	public List<RepresentationDto> getRepresentations() {
+		return this.representations;
 	}
 }

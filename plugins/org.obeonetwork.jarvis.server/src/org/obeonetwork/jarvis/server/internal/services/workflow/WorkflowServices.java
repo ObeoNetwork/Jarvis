@@ -25,6 +25,7 @@ import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.viewpoint.description.DescriptionPackage;
 import org.eclipse.sirius.viewpoint.description.Group;
 import org.obeonetwork.jarvis.server.internal.dtos.workflow.PageDto;
+import org.obeonetwork.jarvis.server.internal.dtos.workflow.SimplePageDto;
 import org.obeonetwork.jarvis.server.internal.dtos.workflow.WorkflowDto;
 import org.obeonetwork.jarvis.workflow.workflow.PageDescription;
 import org.obeonetwork.jarvis.workflow.workflow.WorkflowDescription;
@@ -60,7 +61,7 @@ public class WorkflowServices {
 		Collection<PageDescription> pageDescriptions = workflowDescriptions.stream()
 				.flatMap(workflowDescription -> workflowDescription.getPages().stream()).collect(Collectors.toList());
 		if (pageDescriptions.size() > 0) {
-			List<PageDto> pageDtos = pageDescriptions.stream().map(this::computePage).collect(Collectors.toList());
+			List<SimplePageDto> pageDtos = pageDescriptions.stream().map(this::computeSimplePage).collect(Collectors.toList());
 			return Optional.of(new WorkflowDto(pageDtos));
 		}
 		return Optional.empty();
@@ -93,9 +94,23 @@ public class WorkflowServices {
 	 *
 	 * @param pageDescription
 	 *            The page description
-	 * @return The pageDto computed
+	 * @return The simplePageDto computed
 	 */
-	private PageDto computePage(PageDescription pageDescription) {
-		return new PageDto(pageDescription.getTitleExpression(), null);
+	private SimplePageDto computeSimplePage(PageDescription pageDescription) {
+		return new SimplePageDto(pageDescription.getName(), pageDescription.getTitleExpression(), pageDescription.getDescriptionExpression());
+	}
+
+	/**
+	 * Returns the page with the given pageId.
+	 *
+	 * @param sessionId
+	 *            The identifier of the session
+	 * @param pageId
+	 *            The identifier of the page
+	 * @return An optional containing the page found, or an empty optional
+	 */
+	public Optional<PageDto> getPage(String sessionId, String pageId) {
+		// TODO Compute the PageDto with their SectionDto
+		return Optional.empty();
 	}
 }

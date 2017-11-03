@@ -21,8 +21,10 @@ Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Export-Package: org.obeonetwork.jarvis.server.api;version="1.0.0",
  org.obeonetwork.jarvis.server.internal;version="1.0.0";x-internal:=true,
+ org.obeonetwork.jarvis.server.internal.dtos.representations;version="1.0.0";x-internal:=true,
  org.obeonetwork.jarvis.server.internal.dtos.session;version="1.0.0";x-internal:=true,
  org.obeonetwork.jarvis.server.internal.dtos.workflow;version="1.0.0";x-internal:=true,
  org.obeonetwork.jarvis.server.internal.extensions;version="1.0.0";x-internal:=true,
+ org.obeonetwork.jarvis.server.internal.services.representations;version="1.0.0";x-internal:=true,
  org.obeonetwork.jarvis.server.internal.services.session;version="1.0.0";x-internal:=true,
  org.obeonetwork.jarvis.server.internal.services.workflow;version="1.0.0";x-internal:=true

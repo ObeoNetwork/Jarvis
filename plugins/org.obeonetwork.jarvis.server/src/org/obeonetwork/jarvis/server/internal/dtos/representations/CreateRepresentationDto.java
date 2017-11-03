@@ -8,37 +8,35 @@
  * Contributors:
  *    Obeo - initial API and implementation
  *******************************************************************************/
-package org.obeonetwork.jarvis.server.internal.dtos.workflow;
-
-import java.util.List;
+package org.obeonetwork.jarvis.server.internal.dtos.representations;
 
 /**
- * The workflow.
+ * The command used to create a new representation.
  *
  * @author sbegaudeau
  */
-public class WorkflowDto {
+public class CreateRepresentationDto {
 	/**
-	 * The pages of the workflow.
+	 * The identifier of the representation.
 	 */
-	private List<SimplePageDto> pages;
+	private String representationId;
 
 	/**
-	 * The constructor.
+	 * Return the representationId.
 	 *
-	 * @param pages
-	 *            The pages of the workflow
+	 * @return the representationId
 	 */
-	public WorkflowDto(List<SimplePageDto> pages) {
-		this.pages = pages;
+	public String getRepresentationId() {
+		return this.representationId;
 	}
 
 	/**
-	 * Return the pages of the workflow.
+	 * Sets the representationId.
 	 *
-	 * @return the pages of the workflow
+	 * @param representationId
+	 *            the representationId to set
 	 */
-	public List<SimplePageDto> getPages() {
-		return this.pages;
+	public void setRepresentationId(String representationId) {
+		this.representationId = representationId;
 	}
 }
