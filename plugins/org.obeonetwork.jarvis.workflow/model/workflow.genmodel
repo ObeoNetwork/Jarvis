@@ -6,10 +6,10 @@
     modelName="Workflow" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
     runtimeVersion="2.3" language="" usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.eclipse.sirius/model/viewpoint.genmodel#//viewpoint"
-    operationReflection="false" importOrganizing="true">
+    importOrganizing="true">
   <foreignModel>workflow.ecore</foreignModel>
   <genPackages prefix="Workflow" basePackage="org.obeonetwork.jarvis.workflow" disposableProviderFactory="true"
-      ecorePackage="workflow.ecore#/">
+      childCreationExtenders="true" ecorePackage="workflow.ecore#/">
     <genClasses ecoreClass="workflow.ecore#//WorkflowDescription">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workflow.ecore#//WorkflowDescription/pages"/>
     </genClasses>

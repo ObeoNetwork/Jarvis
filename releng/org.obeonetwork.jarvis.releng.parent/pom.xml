@@ -132,6 +132,8 @@ Contributors:
     <module>targetplatforms/${platform-version-name}</module>
 
     <module>../../plugins/org.obeonetwork.jarvis.workflow</module>
+    <module>../../plugins/org.obeonetwork.jarvis.workflow.edit</module>
+    <module>../../plugins/org.obeonetwork.jarvis.workflow.editor</module>
     <module>../../plugins/org.obeonetwork.jarvis.server</module>
     <module>../../plugins/org.obeonetwork.jarvis.webapp</module>
 
