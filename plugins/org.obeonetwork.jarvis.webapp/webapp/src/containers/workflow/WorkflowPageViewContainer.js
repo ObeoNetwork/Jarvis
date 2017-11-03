@@ -35,11 +35,24 @@ class WorkflowPageViewContainer extends Component {
         }
       };
     });
+    fetch(`/api/sessions/${this.props.match.params.sessionId}/representations/`)
+      .then(resp => resp.json())
+      .then(resp => {
+        this.setState((prevState, props) => {
+          return {
+            representations: resp.representations
+          };
+        });
+      }).catch(err => console.warn(err));
   }
 
   render() {
+    let viewer;
     if (this.state.isLoading) {
       return <p>Loading...</p>;
+    }
+    if (this.state.representations) {
+      viewer = <ViewerCard representations={this.state.representations} handleClick={this.handleRepresentationClick}/>;
     }
     return (
       <View className='workflow-page-view' title={this.state.page.title}>
@@ -51,12 +64,12 @@ class WorkflowPageViewContainer extends Component {
         <div className='workflow-page-view__container'>
           <div className='workflow-page-view__sections'>
             {Object.entries(this.state.page.sections).map(sectionEntry => {
-              return <WorkflowSectionCard key={sectionEntry[0]} section={sectionEntry[1]}/>
+              return <WorkflowSectionCard key={sectionEntry[0]} section={sectionEntry[1]} />
             })}
           </div>
 
           <div className='workflow-page-view__viewer'>
-            <ViewerCard />
+            {viewer}
           </div>
         </div>
       </View>

@@ -8,14 +8,16 @@ const ViewerCard = (props) => {
       <Header>
         <Title>Representations Viewer</Title>
       </Header>
-      <Divider/>
+      <Divider />
       <Body>
         <List>
-          <Item><ItemText>Capture</ItemText></Item>
-          <Item><ItemText>Design</ItemText></Item>
-          <Item><ItemText>Analysis</ItemText></Item>
-          <Item><ItemText>Documentation</ItemText></Item>
-          <Item><ItemText>Review</ItemText></Item>
+          {Object.entries(props.representations).map(representationEntry => {
+            return (
+              <Item key={representationEntry[0]}>
+                <ItemText onClick={props.handleClick}>{representationEntry[1].label}</ItemText>
+              </Item>
+            );
+          })}
         </List>
       </Body>
     </Card>
