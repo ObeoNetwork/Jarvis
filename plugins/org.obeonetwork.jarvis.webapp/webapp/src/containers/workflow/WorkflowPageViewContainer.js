@@ -14,6 +14,7 @@ class WorkflowPageViewContainer extends Component {
       isLoading: true
     };
     this.handleWorkflow = this.handleWorkflow.bind(this);
+    this.handleRepresentationClick = this.handleRepresentationClick.bind(this);
   }
 
   componentDidMount() {
@@ -36,11 +37,11 @@ class WorkflowPageViewContainer extends Component {
       };
     });
     fetch(`/api/sessions/${this.props.match.params.sessionId}/representations/`)
-      .then(resp => resp.json())
-      .then(resp => {
+      .then(response => response.json())
+      .then(response => {
         this.setState((prevState, props) => {
           return {
-            representations: resp.representations
+            representations: response.representations
           };
         });
       }).catch(err => console.warn(err));
@@ -52,7 +53,7 @@ class WorkflowPageViewContainer extends Component {
       return <p>Loading...</p>;
     }
     if (this.state.representations) {
-      viewer = <ViewerCard representations={this.state.representations} handleClick={this.handleRepresentationClick}/>;
+      viewer = <ViewerCard representations={this.state.representations} onRepresentationClick={this.handleRepresentationClick}/>;
     }
     return (
       <View className='workflow-page-view' title={this.state.page.title}>
@@ -78,6 +79,10 @@ class WorkflowPageViewContainer extends Component {
 
   handleWorkflow() {
     this.props.history.push(`/sessions/${this.props.match.params.sessionId}/workflow`)
+  }
+
+  handleRepresentationClick(representationId) {
+    console.log(representationId);
   }
 };
 

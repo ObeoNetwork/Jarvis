@@ -43,6 +43,15 @@
   padding: 16px 0px 16px 0px;
 }
 
+.card__item__link {
+  padding: 16px 0px 16px 0px;
+  cursor: pointer;
+  color: var(--main-color-darker);
+}
+.card__item__link:hover {
+  text-decoration: underline;
+}
+
 .card__item_avatar {
   padding: 16px 16px 16px 0px;
 }

@@ -46,6 +46,8 @@ const ItemImgAvatar = (props) => <img className={classNames('card__item_avatar',
 
 const ItemText = (props) => <div className={classNames('card__item__text', props.className)}>{props.children}</div>;
 
+const ItemLink = (props) => <div className={classNames('card__item__link', props.className)} onClick={props.onClick}>{props.children}</div>;
+
 const ItemSvgIcon = (props) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" className={classNames('card__item__icon', props.className)}>
@@ -79,6 +81,7 @@ export {
   Header,
   Item,
   ItemImgAvatar,
+  ItemLink,
   ItemSvgIcon,
   ItemText,
   List,
