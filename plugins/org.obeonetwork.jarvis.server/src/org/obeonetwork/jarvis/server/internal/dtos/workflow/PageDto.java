@@ -50,7 +50,7 @@ public class PageDto {
 
 	/**
 	 * The constructor.
-	 * 
+	 *
 	 * @param pageId
 	 *            The identifier of the page
 	 * @param label
@@ -67,6 +67,8 @@ public class PageDto {
 	public PageDto(String pageId, String label, String description, String previousPageId, String nextPageId, List<SectionDto> sections) {
 		this.label = label;
 		this.description = description;
+		this.previousPageId = previousPageId;
+		this.nextPageId = nextPageId;
 		this.sections = sections;
 	}
 

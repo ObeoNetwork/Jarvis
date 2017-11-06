@@ -17,6 +17,11 @@ package org.obeonetwork.jarvis.server.internal.dtos.workflow;
  */
 public class ActionDto {
 	/**
+	 * The identifier.
+	 */
+	private String identifier;
+
+	/**
 	 * The label.
 	 */
 	private String label;
@@ -24,11 +29,24 @@ public class ActionDto {
 	/**
 	 * The constructor.
 	 *
+	 * @param identifier
+	 *            The identifier
+	 *
 	 * @param label
 	 *            The label
 	 */
-	public ActionDto(String label) {
+	public ActionDto(String identifier, String label) {
+		this.identifier = identifier;
 		this.label = label;
+	}
+
+	/**
+	 * Return the identifier.
+	 *
+	 * @return the identifier
+	 */
+	public String getIdentifier() {
+		return this.identifier;
 	}
 
 	/**

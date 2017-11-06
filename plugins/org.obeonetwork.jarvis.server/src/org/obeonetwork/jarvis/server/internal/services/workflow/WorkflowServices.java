@@ -152,12 +152,33 @@ public class WorkflowServices {
 		try {
 			String label = itp.evaluateString(self, desc.getTitleExpression());
 			String description = itp.evaluateString(self, desc.getDescriptionExpression());
-			String previousPageId = null, nextPageId = null;
+
+			String previousPageId = this.getPreviousPageId(desc);
+			String nextPageId = this.getNextPageId(desc);
+
 			List<SectionDto> sections = desc.getSections().stream().map(s -> convert(s, session)).filter(s -> s != null).collect(Collectors.toList());
 			return new PageDto(pageId, label, description, previousPageId, nextPageId, sections);
 		} catch (EvaluationException e) {
 			return null;
 		}
+	}
+
+	private String getNextPageId(PageDescription desc) {
+		WorkflowDescription workflow = (WorkflowDescription) desc.eContainer();
+		int index = workflow.getPages().indexOf(desc);
+		if (index + 1 < workflow.getPages().size()) {
+			return workflow.getPages().get(index + 1).getName();
+		}
+		return null;
+	}
+
+	private String getPreviousPageId(PageDescription desc) {
+		WorkflowDescription workflow = (WorkflowDescription) desc.eContainer();
+		int index = workflow.getPages().indexOf(desc);
+		if (index > 0) {
+			return workflow.getPages().get(index - 1).getName();
+		}
+		return null;
 	}
 
 	private SectionDto convert(SectionDescription desc, Session session) {
@@ -179,7 +200,7 @@ public class WorkflowServices {
 		String actionId = desc.getName();
 		try {
 			String label = itp.evaluateString(self, desc.getLabelExpression());
-			return new ActionDto(label);
+			return new ActionDto(actionId, label);
 		} catch (EvaluationException e) {
 			return null;
 		}

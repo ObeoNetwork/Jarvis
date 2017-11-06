@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.obeonetwork.jarvis.server.internal.dtos.representations.CreateRepresentationDto;
+import org.obeonetwork.jarvis.server.internal.dtos.representations.OpenRepresentationDto;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.RepresentationDto;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.RepresentationsDto;
 import org.obeonetwork.jarvis.server.internal.dtos.session.SessionsDto;
@@ -88,6 +90,11 @@ public class JarvisAPIServlet extends HttpServlet {
 	 * The segment used for the create representation command.
 	 */
 	private static final String CREATE_REPRESENTATION = "create_representation"; //$NON-NLS-1$
+
+	/**
+	 * The segment used for the open representation command.
+	 */
+	private static final String OPEN_REPRESENTATION = "open_representation"; //$NON-NLS-1$
 
 	/**
 	 * {@inheritDoc}
@@ -269,6 +276,10 @@ public class JarvisAPIServlet extends HttpServlet {
 		if (this.isCreateRepresentation(segments)) {
 			String sessionId = segments.get(2);
 			this.createRepresentation(req, resp, sessionId);
+		}
+		if (this.isOpenRepresentation(segments)) {
+			String sessionId = segments.get(2);
+			this.openRepresentation(req, resp, sessionId);
 		} else {
 			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
@@ -299,8 +310,49 @@ public class JarvisAPIServlet extends HttpServlet {
 	 *             In case of error
 	 */
 	private void createRepresentation(HttpServletRequest req, HttpServletResponse resp, String sessionId) throws IOException {
-		CreateRepresentationDto createRepresentationDto = new Gson().fromJson(req.getReader(), CreateRepresentationDto.class);
+		String lines = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+		CreateRepresentationDto createRepresentationDto = new Gson().fromJson(lines, CreateRepresentationDto.class);
 		Optional<RepresentationDto> optionalRepresentation = new RepresentationServices().createRepresentation(sessionId, createRepresentationDto);
+		if (optionalRepresentation.isPresent()) {
+			RepresentationDto representationDto = optionalRepresentation.get();
+			String jsonRepresentationDto = new Gson().toJson(representationDto);
+
+			resp.setContentType(APPLICATION_JSON);
+			resp.setCharacterEncoding(UTF_8);
+			resp.getWriter().write(jsonRepresentationDto);
+		} else {
+			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * Indicates if the segments match the path of the open representation API.
+	 *
+	 * @param segments
+	 *            The segments of the path of the request
+	 * @return <code>true</code> if the segments match the open representation API, <code>false</code> otherwise
+	 */
+	private boolean isOpenRepresentation(List<String> segments) {
+		return segments.size() == 5 && SESSIONS.equals(segments.get(1)) && COMMANDS.equals(segments.get(3))
+				&& OPEN_REPRESENTATION.equals(segments.get(4));
+	}
+
+	/**
+	 * Opens the representation in the session with the given session identifier.
+	 *
+	 * @param req
+	 *            The request
+	 * @param resp
+	 *            The response
+	 * @param sessionId
+	 *            The identifier of the session
+	 * @throws IOException
+	 *             In case of error
+	 */
+	private void openRepresentation(HttpServletRequest req, HttpServletResponse resp, String sessionId) throws IOException {
+		String lines = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+		OpenRepresentationDto openRepresentationDto = new Gson().fromJson(lines, OpenRepresentationDto.class);
+		Optional<RepresentationDto> optionalRepresentation = new RepresentationServices().openRepresentation(sessionId, openRepresentationDto);
 		if (optionalRepresentation.isPresent()) {
 			RepresentationDto representationDto = optionalRepresentation.get();
 			String jsonRepresentationDto = new Gson().toJson(representationDto);

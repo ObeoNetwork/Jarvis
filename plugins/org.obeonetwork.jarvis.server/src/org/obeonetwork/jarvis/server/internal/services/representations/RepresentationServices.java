@@ -29,6 +29,7 @@ import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
 import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
 import org.eclipse.ui.PlatformUI;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.CreateRepresentationDto;
+import org.obeonetwork.jarvis.server.internal.dtos.representations.OpenRepresentationDto;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.RepresentationDto;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.RepresentationsDto;
 import org.obeonetwork.jarvis.server.internal.services.session.SessionServices;
@@ -87,6 +88,20 @@ public class RepresentationServices {
 				dialog.open();
 			}
 		}
+		return Optional.empty();
+	}
+
+	/**
+	 * Opens a representation in the session with the given sessionId.
+	 *
+	 * @param sessionId
+	 *            The identifier of the session
+	 * @param openRepresentationDto
+	 *            The details of the representation to open
+	 * @return An optional with the representation opened or an empty optional if it could not be opened
+	 */
+	public Optional<RepresentationDto> openRepresentation(String sessionId, OpenRepresentationDto openRepresentationDto) {
+		// TODO Do something, obvisouly :)
 		return Optional.empty();
 	}
 
