@@ -1,6 +1,8 @@
 import React from "react";
 
-import { Card, Body, Divider, Header, List, Item, ItemText, Title } from "../cards/Card";
+import { Card, Body, Divider, Header, List, Item, ItemImgAvatar, ItemText, Title } from "../cards/Card";
+
+import diagramImage from './DDiagram.gif';
 
 const ViewerCard = (props) => {
   return (
@@ -14,6 +16,7 @@ const ViewerCard = (props) => {
           {Object.entries(props.representations).map(representationEntry => {
             return (
               <Item key={representationEntry[0]}>
+                <ItemImgAvatar src={diagramImage} alt='The type of the representation' />
                 <ItemText onClick={props.handleClick}>{representationEntry[1].label}</ItemText>
               </Item>
             );

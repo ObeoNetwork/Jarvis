@@ -43,6 +43,10 @@
   padding: 16px 0px 16px 0px;
 }
 
+.card__item_avatar {
+  padding: 16px 16px 16px 0px;
+}
+
 .card__item__icon {
   width: 24px;
   height: 24px;

@@ -40,7 +40,9 @@ const Body = (props) => {
 
 const List = (props) => <div className={classNames('card__list', props.className)}>{props.children}</div>;
 
-const Item = (props) => <div className={classNames('card__item', props.className)}>{props.children}</div>
+const Item = (props) => <div className={classNames('card__item', props.className)}>{props.children}</div>;
+
+const ItemImgAvatar = (props) => <img className={classNames('card__item_avatar', props.className)} src={props.src} alt={props.alt} />;
 
 const ItemText = (props) => <div className={classNames('card__item__text', props.className)}>{props.children}</div>;
 
@@ -76,6 +78,7 @@ export {
   Footer,
   Header,
   Item,
+  ItemImgAvatar,
   ItemSvgIcon,
   ItemText,
   List,
