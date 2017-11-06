@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
 
 import { Action, Body, Card, Footer, Header, Subtitle, Title } from "../cards/Card";
 
@@ -29,8 +28,8 @@ class WorkflowPageCard extends Component {
   }
 
   handleView() {
-    this.props.history.push(`/sessions/${this.props.sessionId}/workflow/pages/${this.props.page.pageId}`);
+    this.props.handleView(this.props.page.pageId);
   }
 };
 
-export default withRouter(WorkflowPageCard);
+export default WorkflowPageCard;

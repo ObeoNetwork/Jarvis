@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 
 import View from "../../presentationals/app/View";
 import WorkflowPageCard from "../../presentationals/workflow/WorkflowPageCard";
@@ -8,6 +9,7 @@ import './WorkflowViewContainer.css';
 class WorkflowViewContainer extends Component {
   constructor(props) {
     super(props);
+    this.handleView = this.handleView.bind(this);
     this.state = {
       isLoading: true
     };
@@ -44,7 +46,7 @@ class WorkflowViewContainer extends Component {
       body = (
         <div className='workflow-view__container'>
           {Object.entries(this.state.workflow.pages).map(pageEntry => {
-            return <WorkflowPageCard key={pageEntry[0]} sessionId={this.state.sessionId} page={pageEntry[1]} />;
+            return <WorkflowPageCard key={pageEntry[0]} sessionId={this.state.sessionId} page={pageEntry[1]} handleView={this.handleView} />;
           })}
         </div>
       );
@@ -57,6 +59,10 @@ class WorkflowViewContainer extends Component {
       </View>
     );
   }
+
+  handleView(pageId) {
+    this.props.history.push(`/sessions/${this.props.sessionId}/workflow/pages/${pageId}`);
+  }
 };
 
-export default WorkflowViewContainer;
+export default withRouter(WorkflowViewContainer);
