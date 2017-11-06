@@ -20,32 +20,54 @@ class WorkflowPageViewContainer extends Component {
     this.handleRepresentationClick = this.handleRepresentationClick.bind(this);
   }
 
-  componentDidMount() {
-    fetch(`/api/sessions/${this.props.match.params.sessionId}/workflow/pages/${this.props.match.params.pageId}`)
-      .then(response => response.json())
-      .then(response => this.setState((prevState, props) => {
+  update(props) {
+    Promise.all([
+      fetch(`/api/sessions/${props.match.params.sessionId}/workflow/pages/${props.match.params.pageId}`),
+      fetch(`/api/sessions/${props.match.params.sessionId}/representations/`)
+    ])
+    .then(responses => Promise.all(responses.map(res => res.json())))
+    .then(responses => {
+      const page = responses[0];
+      const representations = responses[1].representations;
+
+      this.setState((prevState, props) => {
+        console.log(responses);
         return {
           isLoading: false,
-          page: response
-        };
-      }))
-      .catch(err => console.warn(err));
+          page,
+          representations
+        }
+      });
+    })
+    .catch(errors => console.warn(errors));
+  }
 
-    fetch(`/api/sessions/${this.props.match.params.sessionId}/representations/`)
-      .then(response => response.json())
-      .then(response => {
-        this.setState((prevState, props) => {
-          return {
-            representations: response.representations
-          };
-        });
-      }).catch(err => console.warn(err));
+  componentWillReceiveProps(nextProps) {
+    const locationChanged = nextProps.location !== this.props.location;
+    if (locationChanged) {
+      // Update the state of the component using the NEXT version of the props with the nex route!!
+      this.update(nextProps);
+    }
+  }
+
+  componentDidMount() {
+    this.update(this.props);
   }
 
   render() {
     let viewer;
+    let previousPageButton;
+    let nextPageButton;
     if (this.state.isLoading) {
       return <p>Loading...</p>;
+    }
+    if (this.state.page) {
+      if (this.state.page.previousPageId) {
+        previousPageButton = <button onClick={this.handleGoToPreviousPage}>Previous</button>;
+      }
+      if (this.state.page.nextPageId) {
+        nextPageButton = <button onClick={this.handleGoToNextPage}>Next</button>;
+      }
     }
     if (this.state.representations) {
       viewer = <ViewerCard representations={this.state.representations} onRepresentationClick={this.handleRepresentationClick}/>;
@@ -54,8 +76,8 @@ class WorkflowPageViewContainer extends Component {
       <View className='workflow-page-view' title={this.state.page.label}>
         <div className='workflow-page-view__navbar'>
           <button onClick={this.handleGoToWorkflow}>Workflow</button>
-          <button onClick={this.handleGoToPreviousPage}>Previous</button>
-          <button onClick={this.handleGoToNextPage}>Next</button>
+          {previousPageButton}
+          {nextPageButton}
         </div>
         <div className='workflow-page-view__container'>
           <div className='workflow-page-view__sections'>
@@ -73,23 +95,41 @@ class WorkflowPageViewContainer extends Component {
   }
 
   handleGoToWorkflow() {
-    this.props.history.push(`/sessions/${this.props.match.params.sessionId}/workflow`)
+    this.props.history.push(`/sessions/${this.props.match.params.sessionId}/workflow`);
   }
 
   handleGoToPreviousPage() {
-    console.log('Go to previous');
+    this.props.history.push(`/sessions/${this.props.match.params.sessionId}/workflow/pages/${this.state.page.previousPageId}`);
   }
 
   handleGoToNextPage() {
-    console.log('Go to next page');
+    this.props.history.push(`/sessions/${this.props.match.params.sessionId}/workflow/pages/${this.state.page.nextPageId}`);
   }
 
   handleActivityClick(event, activity) {
-    console.log(activity);
+    const headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+
+    const body = JSON.stringify({
+      representationId: activity.identifier
+    });
+    fetch(`/api/sessions/${this.props.match.params.sessionId}/commands/create_representation`, { method: 'POST', body, headers })
+      .then(response => console.log('Representation created'))
+      .catch(err => console.warn(err));
   }
 
   handleRepresentationClick(representationId) {
-    console.log(representationId);
+    const headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+
+    const body = JSON.stringify({
+      representationId
+    });
+    fetch(`/api/sessions/${this.props.match.params.sessionId}/commands/open_representation`, { method: 'POST', body, headers })
+      .then(response => console.log('Representation opened'))
+      .catch(err => console.warn(err));
   }
 };
 
