@@ -16,24 +16,16 @@ class WorkflowViewContainer extends Component {
   }
 
   componentDidMount() {
-    this.setState((prevState, props) => {
-      return {
-        isLoading: false,
-        sessionId: props.match.params.sessionId,
-        workflow: {
-          pages: [
-            { pageId: 1, title: 'Overview', description: 'Experiential agile human-centered design earned media prototype user centered design pivot Steve Jobs physical computing disrupt fund user centered design engaging. 360 campaign responsive intuitive user centered design venture capital iterate agile. Bootstrapping thought leader big data SpaceTeam responsive convergence big data user story unicorn pitch deck. Entrepreneur quantitative vs. qualitative co-working SpaceTeam thinker-maker-doer co-working thought leader paradigm physical computing.' },
-            { pageId: 2, title: 'Analyze', description: 'Experiential agile human-centered design earned media prototype user centered design pivot Steve Jobs physical computing disrupt fund user centered design engaging. 360 campaign responsive intuitive user centered design venture capital iterate agile. Bootstrapping thought leader big data SpaceTeam responsive convergence big data user story unicorn pitch deck. Entrepreneur quantitative vs. qualitative co-working SpaceTeam thinker-maker-doer co-working thought leader paradigm physical computing.' },
-            { pageId: 3, title: 'Review', description: 'Experiential agile human-centered design earned media prototype user centered design pivot Steve Jobs physical computing disrupt fund user centered design engaging. 360 campaign responsive intuitive user centered design venture capital iterate agile. Bootstrapping thought leader big data SpaceTeam responsive convergence big data user story unicorn pitch deck. Entrepreneur quantitative vs. qualitative co-working SpaceTeam thinker-maker-doer co-working thought leader paradigm physical computing.' },
-            { pageId: 4, title: 'Documentation', description: 'Experiential agile human-centered design earned media prototype user centered design pivot Steve Jobs physical computing disrupt fund user centered design engaging. 360 campaign responsive intuitive user centered design venture capital iterate agile. Bootstrapping thought leader big data SpaceTeam responsive convergence big data user story unicorn pitch deck. Entrepreneur quantitative vs. qualitative co-working SpaceTeam thinker-maker-doer co-working thought leader paradigm physical computing.' },
-            { pageId: 5, title: 'Planning', description: 'Experiential agile human-centered design earned media prototype user centered design pivot Steve Jobs physical computing disrupt fund user centered design engaging. 360 campaign responsive intuitive user centered design venture capital iterate agile. Bootstrapping thought leader big data SpaceTeam responsive convergence big data user story unicorn pitch deck. Entrepreneur quantitative vs. qualitative co-working SpaceTeam thinker-maker-doer co-working thought leader paradigm physical computing.' },
-            { pageId: 5, title: 'Evaluation', description: 'Experiential agile human-centered design earned media prototype user centered design pivot Steve Jobs physical computing disrupt fund user centered design engaging. 360 campaign responsive intuitive user centered design venture capital iterate agile. Bootstrapping thought leader big data SpaceTeam responsive convergence big data user story unicorn pitch deck. Entrepreneur quantitative vs. qualitative co-working SpaceTeam thinker-maker-doer co-working thought leader paradigm physical computing.' },
-            { pageId: 7, title: 'Publication', description: 'Experiential agile human-centered design earned media prototype user centered design pivot Steve Jobs physical computing disrupt fund user centered design engaging. 360 campaign responsive intuitive user centered design venture capital iterate agile. Bootstrapping thought leader big data SpaceTeam responsive convergence big data user story unicorn pitch deck. Entrepreneur quantitative vs. qualitative co-working SpaceTeam thinker-maker-doer co-working thought leader paradigm physical computing.' },
-            { pageId: 8, title: 'Deployment', description: 'Experiential agile human-centered design earned media prototype user centered design pivot Steve Jobs physical computing disrupt fund user centered design engaging. 360 campaign responsive intuitive user centered design venture capital iterate agile. Bootstrapping thought leader big data SpaceTeam responsive convergence big data user story unicorn pitch deck. Entrepreneur quantitative vs. qualitative co-working SpaceTeam thinker-maker-doer co-working thought leader paradigm physical computing.' }
-          ]
-        }
-      };
-    });
+    fetch(`/api/sessions/${this.props.match.params.sessionId}/workflow`)
+      .then(response => response.json())
+      .then(response => this.setState((prevState, props) => {
+        return {
+          isLoading: false,
+          sessionId: props.match.params.sessionId,
+          workflow: response
+        };
+      }))
+      .catch(err => console.warn(err));
   }
 
   render() {

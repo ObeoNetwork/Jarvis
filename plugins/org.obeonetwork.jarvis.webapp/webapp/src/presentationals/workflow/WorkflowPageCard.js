@@ -14,7 +14,7 @@ class WorkflowPageCard extends Component {
     return (
       <Card className='workflow-page-card'>
         <Header>
-          <Title>{this.props.page.title}</Title>
+          <Title>{this.props.page.label}</Title>
           <Subtitle>Workflow</Subtitle>
         </Header>
         <Body>
