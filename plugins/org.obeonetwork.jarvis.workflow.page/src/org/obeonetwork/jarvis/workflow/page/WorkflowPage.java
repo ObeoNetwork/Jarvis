@@ -78,6 +78,7 @@ public class WorkflowPage extends AbstractSessionEditorPage {
 
     @Override
     public Optional<PageUpdateCommand> resourceSetChanged(ResourceSetChangeEvent resourceSetChangeEvent) {
+        browser.refresh();
         return Optional.empty();
     }
 }
