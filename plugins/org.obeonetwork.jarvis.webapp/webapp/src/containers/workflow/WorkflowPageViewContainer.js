@@ -21,24 +21,16 @@ class WorkflowPageViewContainer extends Component {
   }
 
   componentDidMount() {
-    this.setState((prevState, props) => {
-      return {
-        isLoading: false,
-        page: {
-          pageId: 1,
-          title: 'Page ' + props.match.params.pageId,
-          description: 'Description of the page',
-          sections: [
-            { sectionId: 1, title: 'Section 1', activities: [ { activityId: 1, title: 'Open Diagram' }, { activityId: 2, title: 'Create Activity Diagram' }, { activityId: 3, title: 'Create Component Diagram' }, { activityId: 4, title: 'Create Class Diagram' } ] },
-            { sectionId: 2, title: 'Section 2', activities: [ { activityId: 3, title: 'Open Diagram' }, { activityId: 4, title: 'Create Diagram' } ] },
-            { sectionId: 3, title: 'Section 3', activities: [ { activityId: 5, title: 'Open Diagram' }, { activityId: 6, title: 'Create Diagram' } ] },
-            { sectionId: 4, title: 'Section 4', activities: [ { activityId: 7, title: 'Open Diagram' }, { activityId: 8, title: 'Create Diagram' } ] },
-            { sectionId: 5, title: 'Section 5', activities: [ { activityId: 7, title: 'Open Diagram' }, { activityId: 8, title: 'Create Diagram' } ] },
-            { sectionId: 6, title: 'Section 6', activities: [ { activityId: 7, title: 'Open Diagram' }, { activityId: 8, title: 'Create Diagram' } ] }
-          ]
-        }
-      };
-    });
+    fetch(`/api/sessions/${this.props.match.params.sessionId}/workflow/pages/${this.props.match.params.pageId}`)
+      .then(response => response.json())
+      .then(response => this.setState((prevState, props) => {
+        return {
+          isLoading: false,
+          page: response
+        };
+      }))
+      .catch(err => console.warn(err));
+
     fetch(`/api/sessions/${this.props.match.params.sessionId}/representations/`)
       .then(response => response.json())
       .then(response => {
@@ -59,7 +51,7 @@ class WorkflowPageViewContainer extends Component {
       viewer = <ViewerCard representations={this.state.representations} onRepresentationClick={this.handleRepresentationClick}/>;
     }
     return (
-      <View className='workflow-page-view' title={this.state.page.title}>
+      <View className='workflow-page-view' title={this.state.page.label}>
         <div className='workflow-page-view__navbar'>
           <button onClick={this.handleGoToWorkflow}>Workflow</button>
           <button onClick={this.handleGoToPreviousPage}>Previous</button>
