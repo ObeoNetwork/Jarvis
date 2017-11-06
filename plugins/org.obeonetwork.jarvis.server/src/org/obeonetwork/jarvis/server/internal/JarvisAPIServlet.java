@@ -102,13 +102,13 @@ public class JarvisAPIServlet extends HttpServlet {
 
 		if (this.isSessions(segments)) {
 			this.getSessions(req, resp);
-		} else if (this.isWorkflow(segments)) {
-			String sessionId = segments.get(2);
-			this.getWorkflow(req, resp, sessionId);
 		} else if (this.isPages(segments)) {
 			String sessionId = segments.get(2);
 			String pageId = segments.get(5);
 			this.getPage(req, resp, sessionId, pageId);
+		} else if (this.isWorkflow(segments)) {
+			String sessionId = segments.get(2);
+			this.getWorkflow(req, resp, sessionId);
 		} else if (this.isRepresentations(segments)) {
 			String sessionId = segments.get(2);
 			this.getRepresentations(req, resp, sessionId);

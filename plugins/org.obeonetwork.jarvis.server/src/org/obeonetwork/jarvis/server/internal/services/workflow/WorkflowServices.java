@@ -14,20 +14,30 @@ import com.google.common.io.BaseEncoding;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.business.api.query.EObjectQuery;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.sirius.business.internal.session.danalysis.DAnalysisSessionImpl;
+import org.eclipse.sirius.common.tools.api.interpreter.EvaluationException;
+import org.eclipse.sirius.common.tools.api.interpreter.IInterpreter;
 import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.viewpoint.description.DescriptionPackage;
 import org.eclipse.sirius.viewpoint.description.Group;
+import org.obeonetwork.jarvis.server.internal.dtos.workflow.ActionDto;
 import org.obeonetwork.jarvis.server.internal.dtos.workflow.PageDto;
+import org.obeonetwork.jarvis.server.internal.dtos.workflow.SectionDto;
 import org.obeonetwork.jarvis.server.internal.dtos.workflow.SimplePageDto;
 import org.obeonetwork.jarvis.server.internal.dtos.workflow.WorkflowDto;
+import org.obeonetwork.jarvis.server.internal.services.session.SessionServices;
+import org.obeonetwork.jarvis.workflow.workflow.ActivityDescription;
 import org.obeonetwork.jarvis.workflow.workflow.PageDescription;
+import org.obeonetwork.jarvis.workflow.workflow.SectionDescription;
 import org.obeonetwork.jarvis.workflow.workflow.WorkflowDescription;
 
 /**
@@ -61,7 +71,8 @@ public class WorkflowServices {
 		Collection<PageDescription> pageDescriptions = workflowDescriptions.stream()
 				.flatMap(workflowDescription -> workflowDescription.getPages().stream()).collect(Collectors.toList());
 		if (pageDescriptions.size() > 0) {
-			List<SimplePageDto> pageDtos = pageDescriptions.stream().map(this::computeSimplePage).collect(Collectors.toList());
+			List<SimplePageDto> pageDtos = pageDescriptions.stream().map(p -> computeSimplePage(p, session)).filter(p -> p != null)
+					.collect(Collectors.toList());
 			return Optional.of(new WorkflowDto(pageDtos));
 		}
 		return Optional.empty();
@@ -94,10 +105,20 @@ public class WorkflowServices {
 	 *
 	 * @param pageDescription
 	 *            The page description
+	 * @param session
+	 *            the session.
 	 * @return The simplePageDto computed
 	 */
-	private SimplePageDto computeSimplePage(PageDescription pageDescription) {
-		return new SimplePageDto(pageDescription.getName(), pageDescription.getTitleExpression(), pageDescription.getDescriptionExpression());
+	private SimplePageDto computeSimplePage(PageDescription pageDescription, Session session) {
+		IInterpreter itp = session.getInterpreter();
+		EObject self = ((DAnalysisSessionImpl) session).getAnalyses().iterator().next();
+		try {
+			String title = itp.evaluateString(self, pageDescription.getTitleExpression());
+			String description = itp.evaluateString(self, pageDescription.getDescriptionExpression());
+			return new SimplePageDto(pageDescription.getName(), title, description);
+		} catch (EvaluationException e) {
+			return null;
+		}
 	}
 
 	/**
@@ -110,7 +131,57 @@ public class WorkflowServices {
 	 * @return An optional containing the page found, or an empty optional
 	 */
 	public Optional<PageDto> getPage(String sessionId, String pageId) {
-		// TODO Compute the PageDto with their SectionDto
-		return Optional.empty();
+		Optional<PageDto> result = Optional.<PageDto> empty();
+		Optional<Session> session = new SessionServices().findSessionByID(sessionId);
+		if (session.isPresent()) {
+			Collection<WorkflowDescription> wkf = getWorkflowDescriptions(session.get());
+			Optional<PageDescription> pageDesc = wkf.stream().flatMap(w -> w.getPages().stream()).filter(pd -> Objects.equals(pd.getName(), pageId))
+					.findFirst();
+			if (pageDesc.isPresent()) {
+				result = Optional.ofNullable(convert(pageDesc.get(), session.get()));
+			}
+		}
+		return result;
+	}
+
+	// CHECKSTYLE:OFF
+	private PageDto convert(PageDescription desc, Session session) {
+		IInterpreter itp = session.getInterpreter();
+		EObject self = ((DAnalysisSessionImpl) session).getAnalyses().iterator().next();
+		String pageId = desc.getName();
+		try {
+			String label = itp.evaluateString(self, desc.getTitleExpression());
+			String description = itp.evaluateString(self, desc.getDescriptionExpression());
+			String previousPageId = null, nextPageId = null;
+			List<SectionDto> sections = desc.getSections().stream().map(s -> convert(s, session)).filter(s -> s != null).collect(Collectors.toList());
+			return new PageDto(pageId, label, description, previousPageId, nextPageId, sections);
+		} catch (EvaluationException e) {
+			return null;
+		}
+	}
+
+	private SectionDto convert(SectionDescription desc, Session session) {
+		IInterpreter itp = session.getInterpreter();
+		EObject self = ((DAnalysisSessionImpl) session).getAnalyses().iterator().next();
+		String sectionId = desc.getName();
+		try {
+			String label = itp.evaluateString(self, desc.getTitleExpression());
+			List<ActionDto> actions = desc.getActivities().stream().map(a -> convert(a, session)).filter(a -> a != null).collect(Collectors.toList());
+			return new SectionDto(label, actions);
+		} catch (EvaluationException e) {
+			return null;
+		}
+	}
+
+	private ActionDto convert(ActivityDescription desc, Session session) {
+		IInterpreter itp = session.getInterpreter();
+		EObject self = ((DAnalysisSessionImpl) session).getAnalyses().iterator().next();
+		String actionId = desc.getName();
+		try {
+			String label = itp.evaluateString(self, desc.getLabelExpression());
+			return new ActionDto(label);
+		} catch (EvaluationException e) {
+			return null;
+		}
 	}
 }

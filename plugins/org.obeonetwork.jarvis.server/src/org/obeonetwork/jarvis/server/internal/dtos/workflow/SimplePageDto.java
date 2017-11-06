@@ -33,7 +33,7 @@ public class SimplePageDto {
 
 	/**
 	 * The constructor.
-	 * 
+	 *
 	 * @param pageId
 	 *            The identifier of the page
 	 * @param label
@@ -42,6 +42,7 @@ public class SimplePageDto {
 	 *            The description
 	 */
 	public SimplePageDto(String pageId, String label, String description) {
+		this.pageId = pageId;
 		this.label = label;
 		this.description = description;
 	}

@@ -17,9 +17,17 @@ import java.util.List;
 import java.util.Optional;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.sirius.business.api.dialect.DialectManager;
+import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.ui.tools.internal.views.common.item.RepresentationDescriptionItemImpl;
+import org.eclipse.sirius.ui.tools.internal.wizards.CreateRepresentationWizard;
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
+import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
+import org.eclipse.ui.PlatformUI;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.CreateRepresentationDto;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.RepresentationDto;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.RepresentationsDto;
@@ -61,7 +69,24 @@ public class RepresentationServices {
 	 * @return An optional with the representation created or an empty optional if it could not be created
 	 */
 	public Optional<RepresentationDto> createRepresentation(String sessionId, CreateRepresentationDto createRepresentationDto) {
-		// TODO Create a new representation
+		SessionServices svc = new SessionServices();
+		Optional<Session> session = svc.findSessionByID(sessionId);
+		if (session.isPresent()) {
+			String repDescId = createRepresentationDto.getRepresentationId();
+			String uri = new String(BaseEncoding.base64().decode(repDescId));
+			EObject obj = session.get().getTransactionalEditingDomain().getResourceSet().getEObject(URI.createURI(uri), false);
+			if (obj instanceof RepresentationDescription && !((InternalEObject) obj).eIsProxy()) {
+				RepresentationDescription repDesc = (RepresentationDescription) obj;
+				CreateRepresentationWizard wizard = new CreateRepresentationWizard(session.get(),
+						new RepresentationDescriptionItemImpl(session.get(), repDesc, null));
+				wizard.init();
+				final WizardDialog dialog = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), wizard);
+				dialog.setMinimumPageSize(CreateRepresentationWizard.MIN_PAGE_WIDTH, CreateRepresentationWizard.MIN_PAGE_HEIGHT);
+				dialog.create();
+				dialog.getShell().setText("Create Representation"); //$NON-NLS-1$
+				dialog.open();
+			}
+		}
 		return Optional.empty();
 	}
 
