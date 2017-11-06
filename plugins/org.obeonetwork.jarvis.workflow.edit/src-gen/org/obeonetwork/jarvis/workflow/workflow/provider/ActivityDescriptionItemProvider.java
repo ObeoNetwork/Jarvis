@@ -153,7 +153,7 @@ public class ActivityDescriptionItemProvider extends IdentifiedElementItemProvid
      */
     @Override
     public String getText(Object object) {
-        String label = ((ActivityDescription) object).getName();
+        String label = ((ActivityDescription) object).getLabelExpression();
         return label == null || label.length() == 0 ? getString("_UI_ActivityDescription_type") : getString("_UI_ActivityDescription_type") + " " + label;
     }
 

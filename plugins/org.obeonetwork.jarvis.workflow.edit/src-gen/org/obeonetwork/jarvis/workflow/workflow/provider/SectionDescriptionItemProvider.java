@@ -167,7 +167,7 @@ public class SectionDescriptionItemProvider extends IdentifiedElementItemProvide
      */
     @Override
     public String getText(Object object) {
-        String label = ((SectionDescription) object).getName();
+        String label = ((SectionDescription) object).getTitleExpression();
         return label == null || label.length() == 0 ? getString("_UI_SectionDescription_type") : getString("_UI_SectionDescription_type") + " " + label;
     }
 
