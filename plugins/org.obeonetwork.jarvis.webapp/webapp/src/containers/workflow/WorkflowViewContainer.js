@@ -61,7 +61,7 @@ class WorkflowViewContainer extends Component {
   }
 
   handleView(pageId) {
-    this.props.history.push(`/sessions/${this.props.sessionId}/workflow/pages/${pageId}`);
+    this.props.history.push(`/sessions/${this.props.match.params.sessionId}/workflow/pages/${pageId}`);
   }
 };
 

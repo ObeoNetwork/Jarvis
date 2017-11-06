@@ -13,7 +13,10 @@ class WorkflowPageViewContainer extends Component {
     this.state = {
       isLoading: true
     };
-    this.handleWorkflow = this.handleWorkflow.bind(this);
+    this.handleGoToWorkflow = this.handleGoToWorkflow.bind(this);
+    this.handleGoToPreviousPage = this.handleGoToPreviousPage.bind(this);
+    this.handleGoToNextPage = this.handleGoToNextPage.bind(this);
+    this.handleActivityClick = this.handleActivityClick.bind(this);
     this.handleRepresentationClick = this.handleRepresentationClick.bind(this);
   }
 
@@ -58,14 +61,14 @@ class WorkflowPageViewContainer extends Component {
     return (
       <View className='workflow-page-view' title={this.state.page.title}>
         <div className='workflow-page-view__navbar'>
-          <button onClick={this.handleWorkflow}>Workflow</button>
-          <button>Previous</button>
-          <button>Next</button>
+          <button onClick={this.handleGoToWorkflow}>Workflow</button>
+          <button onClick={this.handleGoToPreviousPage}>Previous</button>
+          <button onClick={this.handleGoToNextPage}>Next</button>
         </div>
         <div className='workflow-page-view__container'>
           <div className='workflow-page-view__sections'>
             {Object.entries(this.state.page.sections).map(sectionEntry => {
-              return <WorkflowSectionCard key={sectionEntry[0]} section={sectionEntry[1]} />
+              return <WorkflowSectionCard key={sectionEntry[0]} section={sectionEntry[1]} onActivityClick={this.handleActivityClick}/>
             })}
           </div>
 
@@ -77,8 +80,20 @@ class WorkflowPageViewContainer extends Component {
     );
   }
 
-  handleWorkflow() {
+  handleGoToWorkflow() {
     this.props.history.push(`/sessions/${this.props.match.params.sessionId}/workflow`)
+  }
+
+  handleGoToPreviousPage() {
+    console.log('Go to previous');
+  }
+
+  handleGoToNextPage() {
+    console.log('Go to next page');
+  }
+
+  handleActivityClick(event, activity) {
+    console.log(activity);
   }
 
   handleRepresentationClick(representationId) {
