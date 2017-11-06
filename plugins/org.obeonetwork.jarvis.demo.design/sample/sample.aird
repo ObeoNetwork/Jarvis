@@ -4,20 +4,20 @@
     <semanticResources>sample.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_pszs4LjHEee0K5IoMBrBpQ">
       <viewpoint xmi:type="description:Viewpoint" href="../description/demo.odesign#//@ownedViewpoints[name='Sample%20Viewpoint']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_oVQUYMLpEee_uJmGyd-GBw" name="Diagram #2" repPath="#_oUk-8MLpEee_uJmGyd-GBw">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_oVQUYMLpEee_uJmGyd-GBw" name="Operational Architecture" repPath="#_oUk-8MLpEee_uJmGyd-GBw">
         <description xmi:type="description_1:DiagramDescription" href="../description/demo.odesign#//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='']"/>
         <target xmi:type="ecore:EPackage" href="sample.ecore#/"/>
       </ownedRepresentationDescriptors>
     </ownedViews>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_VEObsMMBEee2eJDr4LoAVw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.sirius.sample.ecore.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_VQ9QIMMBEee2eJDr4LoAVw" name="X2" repPath="#_VM4ocMMBEee2eJDr4LoAVw">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_VQ9QIMMBEee2eJDr4LoAVw" name="System Analysis" repPath="#_VM4ocMMBEee2eJDr4LoAVw">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.sirius.sample.ecore.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="sample.ecore#/"/>
       </ownedRepresentationDescriptors>
     </ownedViews>
   </viewpoint:DAnalysis>
-  <diagram:DSemanticDiagram xmi:id="_oVKNwMLpEee_uJmGyd-GBw" name="Diagram #2" uid="_oUk-8MLpEee_uJmGyd-GBw">
+  <diagram:DSemanticDiagram xmi:id="_oVKNwMLpEee_uJmGyd-GBw" name="Operational Architecture" uid="_oUk-8MLpEee_uJmGyd-GBw">
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_oVMC8MLpEee_uJmGyd-GBw" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_oVMqAMLpEee_uJmGyd-GBw"/>
     </ownedAnnotationEntries>
@@ -53,7 +53,7 @@
     <activatedLayers xmi:type="description_1:Layer" href="../description/demo.odesign#//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='']/@defaultLayer"/>
     <target xmi:type="ecore:EPackage" href="sample.ecore#/"/>
   </diagram:DSemanticDiagram>
-  <diagram:DSemanticDiagram xmi:id="_VQ6z4MMBEee2eJDr4LoAVw" name="X2" uid="_VM4ocMMBEee2eJDr4LoAVw">
+  <diagram:DSemanticDiagram xmi:id="_VQ6z4MMBEee2eJDr4LoAVw" name="System Analysis" uid="_VM4ocMMBEee2eJDr4LoAVw">
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_VQ6z4cMBEee2eJDr4LoAVw" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_VQ6z4sMBEee2eJDr4LoAVw"/>
     </ownedAnnotationEntries>

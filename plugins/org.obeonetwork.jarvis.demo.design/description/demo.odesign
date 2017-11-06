@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:workflow="http://www.obeonetwork.org/dsl/jarvis/workflow" name="demo" version="12.0.0.2017041100">
   <ownedViewpoints name="Sample Viewpoint">
-    <ownedRepresentations xsi:type="description_1:DiagramDescription" domainClass="ecore::EPackage" enablePopupBars="true">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="diagram_description" domainClass="ecore::EPackage" enablePopupBars="true">
       <defaultLayer name="Default">
-        <nodeMappings name="Class" semanticCandidatesExpression="feature:eClassifiers" doubleClickDescription="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='']/@defaultLayer/@toolSections.0/@ownedTools[name='']" domainClass="ecore::EClass">
+        <nodeMappings name="Class" semanticCandidatesExpression="feature:eClassifiers" doubleClickDescription="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='diagram_description']/@defaultLayer/@toolSections.0/@ownedTools[name='']" domainClass="ecore::EClass">
           <style xsi:type="style:BundledImageDescription" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -11,7 +11,7 @@
           </style>
         </nodeMappings>
         <toolSections name="Tools">
-          <ownedTools xsi:type="tool:DoubleClickDescription" mappings="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='']/@defaultLayer/@nodeMappings[name='Class']">
+          <ownedTools xsi:type="tool:DoubleClickDescription" mappings="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='diagram_description']/@defaultLayer/@nodeMappings[name='Class']">
             <element name="element"/>
             <elementView name="elementView"/>
             <initialOperation>
@@ -25,36 +25,114 @@
   </ownedViewpoints>
   <extensions xsi:type="workflow:WorkflowDescription" name="Arcadia">
     <pages name="oa" titleExpression="Operational Analysis" descriptionExpression="Beyond and before requirements, the goal of the Operational Analysis is to model the business view of an operational domain. It is not focused on the system to be develop but on its global environment. Operational Need Analysis is more and more important in complex systems engineering: many major customers require or impose this analysis as mandatory part of the delivered &quot;architecture&quot;.">
-      <sections titleExpression="Define Operational Entities and Capabilities" descriptionExpression="Identify the operational domain: who are the actors and entities, which are their purposes? Activities give a global view upon the operational business goals."/>
-      <sections titleExpression="Define Operational Activities and describe Interactions" descriptionExpression="Detail the operational activity breakdown, describe the interactions between entities and model the operational processes"/>
-      <sections titleExpression="Allocate Operational Activities to Operational Actors, Entities or Roles" descriptionExpression="&lt;p>Operational actors and entities are responsible for performing the operational activities. Manage allocations and deduce communication means between entities. &lt;/p>&lt;p>Create Scenarios to illustrate interactions between the operational actors and entities&lt;/p>"/>
-      <sections titleExpression="Transverse Modeling" descriptionExpression="&lt;p>&lt;b>Describe the state machine of the system&lt;/b>, specifying which are its modes and states. Among others, state machines can be created on the following kinds of elements: system, components, actors, classes (data), etc.&lt;/p>&lt;p>&lt;b>Describe the domain elements and the actually exchanged data.&lt;/b>&lt;/p>&lt;li>Domain Elements: modeling elements of the domain should not be &quot;polluted&quot; by technical considerations (e.g.: internal representation of data, database storage, access methods, etc.). In the beginning, concentrate only on elements that provide high-level semantic related to the domain.&lt;/li>&lt;li>Data actually exchanged between components: used for example to type parameters in interface operations. These data have to be unambiguous and consistent.&lt;/li>&lt;p>Both the domain elements and actual data are described in a Class diagram.&lt;/p>"/>
+      <sections name="def_op_entities" titleExpression="Define Operational Entities" descriptionExpression="Identify the operational domain: who are the actors and entities, which are their purposes? Activities give a global view upon the operational business goals.">
+        <activities name="diagram_description" labelExpression="Create new operational diagram">
+          <operation>
+            <firstModelOperations xsi:type="tool:Navigation" createIfNotExistent="true" diagramDescription="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='diagram_description']"/>
+          </operation>
+        </activities>
+        <activities name="alloc_diag" labelExpression="Create new allocation diagram"/>
+        <activities name="acti_diag" labelExpression="Create new activity diagram"/>
+        <activities name="spec_diag" labelExpression="Create new specification diagram"/>
+      </sections>
+      <sections name="def_op_activities" titleExpression="Define Operational Activities" descriptionExpression="Detail the operational activity breakdown, describe the interactions between entities and model the operational processes">
+        <activities name="alloc_diag" labelExpression="Create new allocation diagram"/>
+        <activities name="acti_diag" labelExpression="Create new activity diagram"/>
+      </sections>
+      <sections name="all_op_activities" titleExpression="Allocate Operational Activities" descriptionExpression="&lt;p>Operational actors and entities are responsible for performing the operational activities. Manage allocations and deduce communication means between entities. &lt;/p>&lt;p>Create Scenarios to illustrate interactions between the operational actors and entities&lt;/p>">
+        <activities name="acti_diag" labelExpression="Create new activity diagram"/>
+        <activities name="spec_diag" labelExpression="Create new specification diagram"/>
+      </sections>
+      <sections name="tra_modeling" titleExpression="Transverse Modeling" descriptionExpression="&lt;p>&lt;b>Describe the state machine of the system&lt;/b>, specifying which are its modes and states. Among others, state machines can be created on the following kinds of elements: system, components, actors, classes (data), etc.&lt;/p>&lt;p>&lt;b>Describe the domain elements and the actually exchanged data.&lt;/b>&lt;/p>&lt;li>Domain Elements: modeling elements of the domain should not be &quot;polluted&quot; by technical considerations (e.g.: internal representation of data, database storage, access methods, etc.). In the beginning, concentrate only on elements that provide high-level semantic related to the domain.&lt;/li>&lt;li>Data actually exchanged between components: used for example to type parameters in interface operations. These data have to be unambiguous and consistent.&lt;/li>&lt;p>Both the domain elements and actual data are described in a Class diagram.&lt;/p>">
+        <activities name="op_diag" labelExpression="Create new operational diagram"/>
+      </sections>
     </pages>
     <pages name="sa" titleExpression="System Analysis" descriptionExpression="The System Analysis level is used to model the system viewed like a black box. It clarifies what the system is expected to do and what its boundaries are.">
-      <sections titleExpression="Transition From Operational Activities" descriptionExpression="&lt;p>Initialisation and automated update of the system analysis according to the breakdown of operational activities.&lt;/p>&lt;p>The initialisation and automated updated of the system actors can also be automatically performed from selected operational entities / actors.&lt;/p>&lt;p>The transition tools create a first 1-1 traceability mapping between System Analysis and Operational Analysis. Use dedicated traceability matrices to modify the traceability relationships.&lt;/p>"/>
-      <sections titleExpression="Define Actors, Missions and Capabilities" descriptionExpression="&lt;p>Identify the boundaries of the system : who which are the actors, which are their goals?&lt;/p>&lt;p>Missions give a global view upon the system main business goals and usages.&lt;/p>&lt;p>Capabilities provide a more operational and finer-grained enlightenment, directly related to customer requirements. Capabilities are meant to be illustrated with scenarios.&lt;/p>"/>
-      <sections titleExpression="Allocate System Functions to System and  Actors" descriptionExpression="&lt;p>The system and the actors are responsible for implementing the system functions. Manage these allocations using an architecture diagram and deduce component exchanges implementing the functional exchanges.&lt;/p>&lt;p>Create dataflows scenarios to illustrate the functional exchanges between the system and the actors.&lt;/p>"/>
-      <sections titleExpression="Refine System Functions, describe Functional Exchanges" descriptionExpression="&lt;p>Enrich and details the functional breakdown with new system functions.&lt;/p>&lt;p>Describe the data flows between system functions and identify specific functional chains.&lt;/p>"/>
-      <sections titleExpression="Define Interfaces and describe Interface Scenarios" descriptionExpression="&lt;p>Detail the interfaces of the system as well as the ones of the actors, thus drawing the boundary of the system.&lt;/p>&lt;p>Describe scenarios in order to specify the dynamical behaviour of the system.&lt;/p>&lt;p>Defining the interaction sequences and identifying the interfaces are two very tight and iterative activities.&lt;/p>"/>
+      <sections titleExpression="Transition From Activities" descriptionExpression="&lt;p>Initialisation and automated update of the system analysis according to the breakdown of operational activities.&lt;/p>&lt;p>The initialisation and automated updated of the system actors can also be automatically performed from selected operational entities / actors.&lt;/p>&lt;p>The transition tools create a first 1-1 traceability mapping between System Analysis and Operational Analysis. Use dedicated traceability matrices to modify the traceability relationships.&lt;/p>">
+        <activities name="diagram_description" labelExpression="Create new operational diagram">
+          <operation>
+            <firstModelOperations xsi:type="tool:Navigation" createIfNotExistent="true" diagramDescription="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='diagram_description']"/>
+          </operation>
+        </activities>
+        <activities name="spec_diag" labelExpression="Create new specification diagram"/>
+      </sections>
+      <sections titleExpression="Define Actors and Missions" descriptionExpression="&lt;p>Identify the boundaries of the system : who which are the actors, which are their goals?&lt;/p>&lt;p>Missions give a global view upon the system main business goals and usages.&lt;/p>&lt;p>Capabilities provide a more operational and finer-grained enlightenment, directly related to customer requirements. Capabilities are meant to be illustrated with scenarios.&lt;/p>">
+        <activities name="spec_diag" labelExpression="Create new specification diagram"/>
+      </sections>
+      <sections titleExpression="Allocate System Functions" descriptionExpression="&lt;p>The system and the actors are responsible for implementing the system functions. Manage these allocations using an architecture diagram and deduce component exchanges implementing the functional exchanges.&lt;/p>&lt;p>Create dataflows scenarios to illustrate the functional exchanges between the system and the actors.&lt;/p>">
+        <activities name="acti_diag" labelExpression="Create new activity diagram"/>
+      </sections>
+      <sections titleExpression="Refine System Functions" descriptionExpression="&lt;p>Enrich and details the functional breakdown with new system functions.&lt;/p>&lt;p>Describe the data flows between system functions and identify specific functional chains.&lt;/p>">
+        <activities name="alloc_diag" labelExpression="Create new allocation diagram"/>
+        <activities name="acti_diag" labelExpression="Create new activity diagram"/>
+      </sections>
+      <sections titleExpression="Define Interfaces" descriptionExpression="&lt;p>Detail the interfaces of the system as well as the ones of the actors, thus drawing the boundary of the system.&lt;/p>&lt;p>Describe scenarios in order to specify the dynamical behaviour of the system.&lt;/p>&lt;p>Defining the interaction sequences and identifying the interfaces are two very tight and iterative activities.&lt;/p>">
+        <activities name="spec_diag" labelExpression="Create new specification diagram"/>
+      </sections>
     </pages>
     <pages name="la" titleExpression="Logical Architecture" descriptionExpression="The Logical Architecture is used to model the system viewed like a white box. The Logical Architecture is a justified breakdown of the system or software, compliant not only with functional issues, but also with all main non-functional concerns susceptible to impact the breakdown. The Logical Architecture is expected to be stable against further engineering steps and detailed design choices (unlike the physical architecture).">
-      <sections titleExpression="Transition from System Functions" descriptionExpression="&lt;p>Initialisation and automated update of the logical functions according to the system functions&lt;/p>&lt;p>The transition tools create a first 1-1 traceability mapping between Logical Architecture and System Analysis. Use dedicated traceability matrices to modify the traceability relationships.&lt;/p>"/>
-      <sections titleExpression="Define Logical Components and Actors" descriptionExpression="&lt;p>The initialisation and automated updated of the logical actors can be performed according to system actors.&lt;/p>&lt;p>Use an architecture or breakdown diagram to describe the system internal building blocks from a logical point of view.Logical components are intended to interact with each other to achieve the functional goals of the system.&lt;/p>"/>
-      <sections titleExpression="Allocate Logical Functions to Logical Components" descriptionExpression="&lt;p>The logical components are responsible for implementing the logical functions. Manage these allocations using an architecture diagram and deduce component exchanges implementing the functional exchanges.&lt;/p>&lt;p>Create dataflows scenarios to illustrate functional exchanges between the components.&lt;/p>"/>
-      <sections titleExpression="Delegate System Interfaces and create Logical Interfaces" descriptionExpression="&lt;p>Use the automated synchronisation tool to initialise the root logical system according to the interfaces defined in System Analysis.&lt;/p>&lt;p>Delegate each system interface to one or more logical components. Create internal interfaces between sub components.&lt;/p>"/>
-      <sections titleExpression="Enrich Logical Scenarios" descriptionExpression="&lt;p>Specify the dynamical behaviour of the logical components by completing the interaction sequences coming from the System Analysis. The enrichment of the interaction sequences and the identification of the logical interfaces are two very tight and iterative activities.&lt;/p>&lt;p>The scenario refinement process is iterative, each update on a source can be automatically propagated to the target.&lt;/p>"/>
+      <sections titleExpression="Transition from System Functions" descriptionExpression="&lt;p>Initialisation and automated update of the logical functions according to the system functions&lt;/p>&lt;p>The transition tools create a first 1-1 traceability mapping between Logical Architecture and System Analysis. Use dedicated traceability matrices to modify the traceability relationships.&lt;/p>">
+        <activities name="acti_diag" labelExpression="Create new activity diagram"/>
+        <activities name="alloc_diag" labelExpression="Create new allocation diagram"/>
+      </sections>
+      <sections titleExpression="Define Logical Components" descriptionExpression="&lt;p>The initialisation and automated updated of the logical actors can be performed according to system actors.&lt;/p>&lt;p>Use an architecture or breakdown diagram to describe the system internal building blocks from a logical point of view.Logical components are intended to interact with each other to achieve the functional goals of the system.&lt;/p>">
+        <activities name="diagram_description" labelExpression="Create new operational diagram">
+          <operation>
+            <firstModelOperations xsi:type="tool:Navigation" createIfNotExistent="true" diagramDescription="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='diagram_description']"/>
+          </operation>
+        </activities>
+        <activities name="acti_diag" labelExpression="Create new activity diagram"/>
+      </sections>
+      <sections titleExpression="Allocate Logical Functions" descriptionExpression="&lt;p>The logical components are responsible for implementing the logical functions. Manage these allocations using an architecture diagram and deduce component exchanges implementing the functional exchanges.&lt;/p>&lt;p>Create dataflows scenarios to illustrate functional exchanges between the components.&lt;/p>">
+        <activities name="spec_diag" labelExpression="Create new specification diagram"/>
+        <activities name="alloc_diag" labelExpression="Create new allocation diagram"/>
+      </sections>
+      <sections titleExpression="Delegate System Interfaces" descriptionExpression="&lt;p>Use the automated synchronisation tool to initialise the root logical system according to the interfaces defined in System Analysis.&lt;/p>&lt;p>Delegate each system interface to one or more logical components. Create internal interfaces between sub components.&lt;/p>">
+        <activities name="acti_diag" labelExpression="Create new activity diagram"/>
+      </sections>
+      <sections titleExpression="Enrich Logical Scenarios" descriptionExpression="&lt;p>Specify the dynamical behaviour of the logical components by completing the interaction sequences coming from the System Analysis. The enrichment of the interaction sequences and the identification of the logical interfaces are two very tight and iterative activities.&lt;/p>&lt;p>The scenario refinement process is iterative, each update on a source can be automatically propagated to the target.&lt;/p>">
+        <activities name="alloc_diag" labelExpression="Create new allocation diagram"/>
+      </sections>
     </pages>
     <pages name="pa" titleExpression="Physical Architecture" descriptionExpression="The Physical Architecture is a refinement and enrichment of the Logical Architecture, dealing with technological and development constraints, through an appropriate organisation and the use of &quot;architectural patterns&quot; or templates to rationalise development. The physical architecture identifies all components that will be produced and integrated.">
-      <sections titleExpression="Transition from Logical Functions" descriptionExpression="&lt;p>Initialisation and automated update of the logical functions according to the system functions&lt;/p>&lt;p>The transition tools create a first 1-1 traceability mapping between Logical Architecture and System Analysis.Use dedicated traceability matrices to modify the traceability relationships.&lt;/p>"/>
-      <sections titleExpression="Refine Physical Functions, describe Functional Exchanges" descriptionExpression="&lt;p>Enrich and details the functional breakdown with new physical functions.&lt;/p>&lt;p>Describe the data flows between logical functions and identify specific functional chains.&lt;/p>"/>
-      <sections titleExpression="Allocate Physical Functions to Physical Components" descriptionExpression="&lt;p>The behavioural physical components are responsible for implementing the physical functions. Manage these allocations using an architecture diagram and deduce component exchanges implementing the functional exchanges.&lt;/p>&lt;p>Manage the deployment of behaviour components on node components and deduce physical links and paths.Create dataflows scenarios to illustrate functional exchanges between the components.&lt;/p>"/>
-      <sections titleExpression="Define Physical Components and Actors, Manage deployments" descriptionExpression="&lt;p>The initialisation and automated updated of the physical actors can be automatically performed according to logical actors.&lt;/p>&lt;p>Define the physical components. A physical component is a physical representation of an entity in the system (hardware, software, firmware, personnel, facilities, data, materials, services and processes). It is in charge of the implementation of one or several logical components. A physical component can be Node or Behaviour.&lt;/p>"/>
-      <sections titleExpression="Delegate Logical Interfaces and create Physical Interfaces" descriptionExpression="&lt;p>Delegate each logical interface to one physical component. Create new physical interfaces between components.&lt;/p>"/>
-      <sections titleExpression="Enrich Physical Scenarios" descriptionExpression="&lt;p>Specify the dynamical behaviour of the physical components by completing the interaction sequences coming from the Logical Architecture. The enrichment of the interaction sequences and the identification of the new physical interfaces are two very tight and iterative activities.&lt;/p>&lt;p>The scenario refinement process is iterative, each update on a source can be automatically propagated to the target.&lt;/p>"/>
+      <sections titleExpression="Transition from Logical Functions" descriptionExpression="&lt;p>Initialisation and automated update of the logical functions according to the system functions&lt;/p>&lt;p>The transition tools create a first 1-1 traceability mapping between Logical Architecture and System Analysis.Use dedicated traceability matrices to modify the traceability relationships.&lt;/p>">
+        <activities name="acti_diag" labelExpression="Create new activity diagram"/>
+        <activities name="spec_diag" labelExpression="Create new specification diagram"/>
+        <activities name="diagram_description" labelExpression="Create new operational diagram">
+          <operation>
+            <firstModelOperations xsi:type="tool:Navigation" createIfNotExistent="true" diagramDescription="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='diagram_description']"/>
+          </operation>
+        </activities>
+      </sections>
+      <sections titleExpression="Refine Physical Functions" descriptionExpression="&lt;p>Enrich and details the functional breakdown with new physical functions.&lt;/p>&lt;p>Describe the data flows between logical functions and identify specific functional chains.&lt;/p>">
+        <activities name="alloc_diag" labelExpression="Create new allocation diagram"/>
+      </sections>
+      <sections titleExpression="Allocate Physical Functions" descriptionExpression="&lt;p>The behavioural physical components are responsible for implementing the physical functions. Manage these allocations using an architecture diagram and deduce component exchanges implementing the functional exchanges.&lt;/p>&lt;p>Manage the deployment of behaviour components on node components and deduce physical links and paths.Create dataflows scenarios to illustrate functional exchanges between the components.&lt;/p>">
+        <activities name="diagram_description" labelExpression="Create new operational diagram">
+          <operation>
+            <firstModelOperations xsi:type="tool:Navigation" createIfNotExistent="true" diagramDescription="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='diagram_description']"/>
+          </operation>
+        </activities>
+      </sections>
+      <sections titleExpression="Define Physical Components" descriptionExpression="&lt;p>The initialisation and automated updated of the physical actors can be automatically performed according to logical actors.&lt;/p>&lt;p>Define the physical components. A physical component is a physical representation of an entity in the system (hardware, software, firmware, personnel, facilities, data, materials, services and processes). It is in charge of the implementation of one or several logical components. A physical component can be Node or Behaviour.&lt;/p>">
+        <activities name="spec_diag" labelExpression="Create new specification diagram"/>
+        <activities name="acti_diag" labelExpression="Create new activity diagram"/>
+      </sections>
+      <sections titleExpression="Delegate Logical Interfaces" descriptionExpression="&lt;p>Delegate each logical interface to one physical component. Create new physical interfaces between components.&lt;/p>">
+        <activities name="alloc_diag" labelExpression="Create new allocation diagram"/>
+      </sections>
+      <sections titleExpression="Enrich Physical Scenarios" descriptionExpression="&lt;p>Specify the dynamical behaviour of the physical components by completing the interaction sequences coming from the Logical Architecture. The enrichment of the interaction sequences and the identification of the new physical interfaces are two very tight and iterative activities.&lt;/p>&lt;p>The scenario refinement process is iterative, each update on a source can be automatically propagated to the target.&lt;/p>">
+        <activities name="spec_diag" labelExpression="Create new specification diagram"/>
+        <activities name="acti_diag" labelExpression="Create new activity diagram"/>
+      </sections>
     </pages>
     <pages name="epbs" titleExpression="EPBS" descriptionExpression="The EPBS Architecture level is used to model the system viewed like a contractual, organisational and industrial breakdown. It describes the actual components chosen to build the System in conformance with expectations described at Physical, Logical and System Analysis taking in account contractual, organisational and industrial concerns.">
-      <sections titleExpression="Define CI Components" descriptionExpression="&lt;p>Initialisation and automated update of the EPBS Architecture according to the Physical Architecture model. Define additional Configuration Items if necessary.&lt;/p>"/>
-      <sections titleExpression="Deduce Interface Scenarios"/>
+      <sections titleExpression="Define CI Components" descriptionExpression="&lt;p>Initialisation and automated update of the EPBS Architecture according to the Physical Architecture model. Define additional Configuration Items if necessary.&lt;/p>">
+        <activities name="acti_diag" labelExpression="Create new activity diagram"/>
+      </sections>
+      <sections titleExpression="Deduce Interface Scenarios">
+        <activities name="spec_diag" labelExpression="Create new specification diagram"/>
+      </sections>
     </pages>
   </extensions>
 </description:Group>
