@@ -23,6 +23,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
@@ -78,7 +79,11 @@ public class WorkflowPage extends AbstractSessionEditorPage {
 
     @Override
     public Optional<PageUpdateCommand> resourceSetChanged(ResourceSetChangeEvent resourceSetChangeEvent) {
-        browser.refresh();
+        Display.getDefault().asyncExec(() -> {
+            if (browser != null && !browser.isDisposed()) {
+                browser.refresh();
+            }
+        });
         return Optional.empty();
     }
 }
