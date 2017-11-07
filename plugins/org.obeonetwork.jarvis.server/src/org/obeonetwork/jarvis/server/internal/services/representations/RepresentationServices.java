@@ -14,19 +14,23 @@ import com.google.common.io.BaseEncoding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.sirius.business.api.dialect.DialectManager;
 import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.ui.business.api.dialect.DialectUIManager;
 import org.eclipse.sirius.ui.tools.internal.views.common.item.RepresentationDescriptionItemImpl;
 import org.eclipse.sirius.ui.tools.internal.wizards.CreateRepresentationWizard;
+import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
 import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.CreateRepresentationDto;
 import org.obeonetwork.jarvis.server.internal.dtos.representations.OpenRepresentationDto;
@@ -69,26 +73,40 @@ public class RepresentationServices {
 	 *            The details of the representation to create
 	 * @return An optional with the representation created or an empty optional if it could not be created
 	 */
+	@SuppressWarnings("restriction")
 	public Optional<RepresentationDto> createRepresentation(String sessionId, CreateRepresentationDto createRepresentationDto) {
-		SessionServices svc = new SessionServices();
-		Optional<Session> session = svc.findSessionByID(sessionId);
+		Optional<Session> session = new SessionServices().findSessionByID(sessionId);
 		if (session.isPresent()) {
 			String repDescId = createRepresentationDto.getRepresentationId();
-			String uri = new String(BaseEncoding.base64().decode(repDescId));
-			EObject obj = session.get().getTransactionalEditingDomain().getResourceSet().getEObject(URI.createURI(uri), false);
-			if (obj instanceof RepresentationDescription && !((InternalEObject) obj).eIsProxy()) {
-				RepresentationDescription repDesc = (RepresentationDescription) obj;
-				CreateRepresentationWizard wizard = new CreateRepresentationWizard(session.get(),
-						new RepresentationDescriptionItemImpl(session.get(), repDesc, null));
+			findRepresentationDescription(session.get(), repDescId).ifPresent(repDesc -> {
+				RepresentationDescriptionItemImpl item = new RepresentationDescriptionItemImpl(session.get(), repDesc, null);
+				CreateRepresentationWizard wizard = new CreateRepresentationWizard(session.get(), item);
 				wizard.init();
-				final WizardDialog dialog = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), wizard);
-				dialog.setMinimumPageSize(CreateRepresentationWizard.MIN_PAGE_WIDTH, CreateRepresentationWizard.MIN_PAGE_HEIGHT);
-				dialog.create();
-				dialog.getShell().setText("Create Representation"); //$NON-NLS-1$
-				dialog.open();
-			}
+				Display display = PlatformUI.getWorkbench().getDisplay();
+				display.syncExec(() -> {
+					final WizardDialog dialog = new WizardDialog(display.getActiveShell(), wizard);
+					dialog.setMinimumPageSize(CreateRepresentationWizard.MIN_PAGE_WIDTH, CreateRepresentationWizard.MIN_PAGE_HEIGHT);
+					dialog.create();
+					dialog.getShell().setText("Create Representation"); //$NON-NLS-1$
+					dialog.open();
+				});
+			});
 		}
 		return Optional.empty();
+	}
+
+	/**
+	 * Locate a {@link RepresentationDescription} in a session's enabled Viewpoints from its identifier.
+	 *
+	 * @param session
+	 *            the session.
+	 * @param id
+	 *            the identified of the {@link RepresentationDescription} to find.
+	 * @return the {@link RepresentationDescription}, if it could be found.
+	 */
+	private Optional<RepresentationDescription> findRepresentationDescription(Session session, String id) {
+		return session.getSelectedViewpoints(true).stream().flatMap(vp -> vp.getOwnedRepresentations().stream())
+				.filter(desc -> Objects.equals(id, desc.getName())).findFirst();
 	}
 
 	/**
@@ -101,8 +119,17 @@ public class RepresentationServices {
 	 * @return An optional with the representation opened or an empty optional if it could not be opened
 	 */
 	public Optional<RepresentationDto> openRepresentation(String sessionId, OpenRepresentationDto openRepresentationDto) {
-		// TODO Do something, obvisouly :)
+		SessionServices svc = new SessionServices();
+		Optional<Session> session = svc.findSessionByID(sessionId);
+		if (session.isPresent()) {
+			String repURI = new String(BaseEncoding.base64().decode(openRepresentationDto.getRepresentationId()));
+			ResourceSet rs = session.get().getTransactionalEditingDomain().getResourceSet();
+			DRepresentationDescriptor repDesc = (DRepresentationDescriptor) rs.getEObject(URI.createURI(repURI), false);
+			DRepresentation rep = repDesc.getRepresentation();
+			PlatformUI.getWorkbench().getDisplay().syncExec(() -> {
+				DialectUIManager.INSTANCE.openEditor(session.get(), rep, new NullProgressMonitor());
+			});
+		}
 		return Optional.empty();
 	}
-
 }
