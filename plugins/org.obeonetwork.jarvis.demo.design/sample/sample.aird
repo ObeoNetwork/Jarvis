@@ -66,7 +66,7 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_VSvY0sMBEee2eJDr4LoAVw"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_VSjyocMBEee2eJDr4LoAVw" fontName="Cantarell" fontHeight="8"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VSjyosMBEee2eJDr4LoAVw"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VSjyosMBEee2eJDr4LoAVw" x="16" y="36" width="136" height="89"/>
         </children>
         <styles xmi:type="notation:DiagramStyle" xmi:id="_VSSF0sMBEee2eJDr4LoAVw"/>
       </data>
@@ -74,6 +74,9 @@
     <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_VQ6z5MMBEee2eJDr4LoAVw" name="A" tooltipText="root.A">
       <target xmi:type="ecore:EClass" href="sample.ecore#//A"/>
       <semanticElements xmi:type="ecore:EClass" href="sample.ecore#//A"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
       <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_VQ6z5cMBEee2eJDr4LoAVw" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="GradientTopToBottom">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.sirius.sample.ecore.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>

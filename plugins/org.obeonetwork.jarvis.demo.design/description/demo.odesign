@@ -4,11 +4,7 @@
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="diagram_description" domainClass="ecore::EPackage" enablePopupBars="true">
       <defaultLayer name="Default">
         <nodeMappings name="Class" semanticCandidatesExpression="feature:eClassifiers" doubleClickDescription="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='diagram_description']/@defaultLayer/@toolSections.0/@ownedTools[name='']" domainClass="ecore::EClass">
-          <style xsi:type="style:BundledImageDescription" labelPosition="node" resizeKind="NSEW">
-            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-          </style>
+          <style xsi:type="style:BundledImageDescription" borderColor="//@userColorsPalettes[name='Arcadia']/@entries[name='Dark%20Blue']" labelColor="//@userColorsPalettes[name='Arcadia']/@entries[name='Dark%20Blue']" labelPosition="node" resizeKind="NSEW" color="//@userColorsPalettes[name='Arcadia']/@entries[name='Blue']"/>
         </nodeMappings>
         <toolSections name="Tools">
           <ownedTools xsi:type="tool:DoubleClickDescription" mappings="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='diagram_description']/@defaultLayer/@nodeMappings[name='Class']">
@@ -23,6 +19,10 @@
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.obeonetwork.jarvis.demo.design.Services"/>
   </ownedViewpoints>
+  <userColorsPalettes name="Arcadia">
+    <entries xsi:type="description:UserFixedColor" red="2" green="84" name="Dark Blue"/>
+    <entries xsi:type="description:UserFixedColor" red="169" green="196" blue="209" name="Blue"/>
+  </userColorsPalettes>
   <extensions xsi:type="workflow:WorkflowDescription" name="Arcadia">
     <pages name="oa" titleExpression="Operational Analysis" descriptionExpression="Beyond and before requirements, the goal of the Operational Analysis is to model the business view of an operational domain. It is not focused on the system to be develop but on its global environment. Operational Need Analysis is more and more important in complex systems engineering: many major customers require or impose this analysis as mandatory part of the delivered &quot;architecture&quot;.">
       <sections name="def_op_entities" titleExpression="Define Operational Entities" descriptionExpression="Identify the operational domain: who are the actors and entities, which are their purposes? Activities give a global view upon the operational business goals.">
@@ -47,7 +47,7 @@
         <activities name="op_diag" labelExpression="Create new operational diagram"/>
       </sections>
     </pages>
-    <pages name="sa" titleExpression="System Analysis" descriptionExpression="The System Analysis level is used to model the system viewed like a black box. It clarifies what the system is expected to do and what its boundaries are.">
+    <pages name="sa" titleExpression="System Analysis" descriptionExpression="The System Analysis level is used to model the system viewed like a black box. It clarifies what the system is expected to do and what its boundaries are. During this step, you will be able to define all the components inside of your system. The concepts define in this analysis will be detailled later in your logical or physical architecture where you will be able to dive inside each system to specify how it should be implemented.">
       <sections titleExpression="Transition From Activities" descriptionExpression="&lt;p>Initialisation and automated update of the system analysis according to the breakdown of operational activities.&lt;/p>&lt;p>The initialisation and automated updated of the system actors can also be automatically performed from selected operational entities / actors.&lt;/p>&lt;p>The transition tools create a first 1-1 traceability mapping between System Analysis and Operational Analysis. Use dedicated traceability matrices to modify the traceability relationships.&lt;/p>">
         <activities name="diagram_description" labelExpression="Create new operational diagram">
           <operation>
