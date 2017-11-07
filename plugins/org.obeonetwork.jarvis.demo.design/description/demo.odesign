@@ -4,7 +4,7 @@
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="diagram_description" domainClass="ecore::EPackage" enablePopupBars="true">
       <defaultLayer name="Default">
         <nodeMappings name="Class" semanticCandidatesExpression="feature:eClassifiers" doubleClickDescription="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='diagram_description']/@defaultLayer/@toolSections.0/@ownedTools[name='']" domainClass="ecore::EClass">
-          <style xsi:type="style:BundledImageDescription" borderColor="//@userColorsPalettes[name='Arcadia']/@entries[name='Dark%20Blue']" labelColor="//@userColorsPalettes[name='Arcadia']/@entries[name='Dark%20Blue']" labelPosition="node" resizeKind="NSEW" color="//@userColorsPalettes[name='Arcadia']/@entries[name='Blue']"/>
+          <style xsi:type="style:BundledImageDescription" borderColor="//@userColorsPalettes[name='Arcadia']/@entries[name='Dark%20Blue']" labelColor="//@userColorsPalettes[name='Arcadia']/@entries[name='Dark%20Blue']" sizeComputationExpression="15" labelPosition="node" resizeKind="NSEW" color="//@userColorsPalettes[name='Arcadia']/@entries[name='Blue']"/>
         </nodeMappings>
         <toolSections name="Tools">
           <ownedTools xsi:type="tool:DoubleClickDescription" mappings="//@ownedViewpoints[name='Sample%20Viewpoint']/@ownedRepresentations[name='diagram_description']/@defaultLayer/@nodeMappings[name='Class']">
