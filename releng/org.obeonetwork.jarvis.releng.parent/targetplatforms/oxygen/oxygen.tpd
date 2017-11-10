@@ -13,3 +13,9 @@ location Orbit "http://download.eclipse.org/tools/orbit/downloads/drops/R2017081
     ch.qos.logback.classic [1.0.7,1.0.8)
     ch.qos.logback.core [1.0.7,1.0.8)
 }
+
+location Google-Guice "https://sbegaudeau.github.io/google-guice" {
+	com.google.inject lazy
+	com.google.inject.servlet lazy
+	com.google.inject.multibindings lazy
+}
