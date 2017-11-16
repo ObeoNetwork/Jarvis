@@ -10,16 +10,20 @@
  *******************************************************************************/
 package org.obeonetwork.jarvis.server.internal;
 
+import com.google.inject.Guice;
+import com.google.inject.servlet.GuiceFilter;
+
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.Filter;
 import javax.servlet.Servlet;
 
 import org.eclipse.equinox.http.jetty.JettyConfigurator;
 import org.eclipse.equinox.http.jetty.JettyConstants;
-import org.obeonetwork.jarvis.server.api.IJarvisServerStaticResourceProvider;
+import org.obeonetwork.jarvis.server.api.AbstractJarvisModule;
 import org.obeonetwork.jarvis.server.internal.extensions.IItemDescriptor;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.http.whiteboard.HttpWhiteboardConstants;
@@ -39,6 +43,11 @@ public class JarvisServerManager {
 	 * The path of the whiteboard context.
 	 */
 	private static final String WHITEBOARD_CONTEXT_PATH = "/"; //$NON-NLS-1$
+
+	/**
+	 * The regex used to match the path handled by Google Guice.
+	 */
+	private static final String GUICE_FILTER_REGEX = "/*"; //$NON-NLS-1$
 
 	/**
 	 * The name of the server.
@@ -102,19 +111,17 @@ public class JarvisServerManager {
 		servletContextHelperProperties.put(HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_PATH, WHITEBOARD_CONTEXT_PATH);
 		context.registerService(Object.class, new JarvisServletContextHelper(), servletContextHelperProperties);
 
-		JarvisAPIServlet jarvisAPIServlet = new JarvisAPIServlet();
-		Dictionary<String, Object> jarvisAPIServletProperties = new Hashtable<>();
-		jarvisAPIServletProperties.put(HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN, JarvisAPIServlet.ALIAS);
-		context.registerService(Servlet.class, jarvisAPIServlet, jarvisAPIServletProperties);
+		List<IItemDescriptor<AbstractJarvisModule>> descriptors = JarvisServerPlugin.getPlugin().getJarvisModuleRegistry().getItemDescriptors();
+		List<AbstractJarvisModule> jarvisModules = descriptors.stream().map(IItemDescriptor::getItem).collect(Collectors.toList());
+		Guice.createInjector(jarvisModules.toArray(new AbstractJarvisModule[jarvisModules.size()]));
 
-		List<IItemDescriptor<IJarvisServerStaticResourceProvider>> descriptors = JarvisServerPlugin.getPlugin()
-				.getJarvisServerStaticResourceProviderRegistry().getItemDescriptors();
-		List<IJarvisServerStaticResourceProvider> staticResourceProviders = descriptors.stream().map(IItemDescriptor::getItem)
-				.collect(Collectors.toList());
-		JarvisResourceServlet jarvisResourceServlet = new JarvisResourceServlet(staticResourceProviders);
-		Dictionary<String, Object> jarvisResourceServletProperties = new Hashtable<>();
-		jarvisResourceServletProperties.put(HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN, JarvisResourceServlet.ALIAS);
-		context.registerService(Servlet.class, jarvisResourceServlet, jarvisResourceServletProperties);
+		Dictionary<String, Object> guiceFilterProperties = new Hashtable<>();
+		guiceFilterProperties.put(HttpWhiteboardConstants.HTTP_WHITEBOARD_FILTER_PATTERN, GUICE_FILTER_REGEX);
+		context.registerService(Filter.class, new GuiceFilter(), guiceFilterProperties);
+
+		Dictionary<String, Object> defaultServletProperties = new Hashtable<>();
+		defaultServletProperties.put(HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_PATTERN, JarvisServlet.ALIAS);
+		context.registerService(Servlet.class, new JarvisServlet(), defaultServletProperties);
 	}
 
 	/**

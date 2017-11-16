@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.obeonetwork.jarvis.server.sirius.api
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: %providerName
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.obeonetwork.jarvis.server.sirius.api.services;version="1.0.0",
+ org.obeonetwork.jarvis.server.sirius.api.services.representations;version="1.0.0",
+ org.obeonetwork.jarvis.server.sirius.api.services.sessions;version="1.0.0",
+ org.obeonetwork.jarvis.server.sirius.api.services.workflow;version="1.0.0"
+Bundle-Localization: plugin
+Require-Bundle: com.google.guava;bundle-version="21.0.0"

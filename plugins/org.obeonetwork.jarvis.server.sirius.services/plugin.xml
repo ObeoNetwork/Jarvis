@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.obeonetwork.jarvis.server.jarvisModule">
+      <descriptor
+            class="org.obeonetwork.jarvis.server.sirius.services.internal.JarvisSiriusServicesModule"
+            description="%JarvisSiriusServicesModule.Description"
+            id="org.obeonetwork.jarvis.server.sirius.services.descriptor1"
+            label="%JarvisSiriusServicesModule.Label">
+      </descriptor>
+   </extension>
+
+</plugin>

@@ -32,6 +32,27 @@ Contributors:
         <artifactId>tycho-source-plugin</artifactId>
         <version>${tycho-version}</version>
       </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>target-platform-configuration</artifactId>
+        <version>${tycho-version}</version>
+        <configuration>
+          <dependency-resolution>
+            <extraRequirements>
+              <requirement>
+                <type>eclipse-plugin</type>
+                <id>com.google.inject.multibindings</id>
+                <versionRange>[4.1.0, 5.0.0)</versionRange>
+              </requirement>
+              <requirement>
+                <type>eclipse-plugin</type>
+                <id>com.google.inject.servlet</id>
+                <versionRange>[4.1.0, 5.0.0)</versionRange>
+              </requirement>
+            </extraRequirements>
+          </dependency-resolution>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>

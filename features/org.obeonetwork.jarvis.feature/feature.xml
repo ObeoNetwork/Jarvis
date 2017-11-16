@@ -52,4 +52,32 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="org.obeonetwork.jarvis.server.sirius"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.obeonetwork.jarvis.server.sirius.api"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.obeonetwork.jarvis.server.sirius.services"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.obeonetwork.jarvis.workflow.page"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>

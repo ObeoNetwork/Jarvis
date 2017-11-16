@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension-point id="jarvisServerStaticResourceProvider" name="%jarvisServerStaticResourceProvider.Name" schema="schema/jarvisServerStaticResourceProvider.exsd"/>
+   <extension-point id="jarvisModule" name="%jarvisModule.Name" schema="schema/jarvisModule.exsd"/>
 </plugin>

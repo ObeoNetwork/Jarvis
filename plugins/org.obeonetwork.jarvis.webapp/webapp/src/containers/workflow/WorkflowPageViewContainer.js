@@ -23,7 +23,7 @@ class WorkflowPageViewContainer extends Component {
   update(props) {
     Promise.all([
       fetch(`/api/sessions/${props.match.params.sessionId}/workflow/pages/${props.match.params.pageId}`),
-      fetch(`/api/sessions/${props.match.params.sessionId}/representations/`)
+      fetch(`/api/sessions/${props.match.params.sessionId}/representations`)
     ])
     .then(responses => Promise.all(responses.map(res => res.json())))
     .then(responses => {

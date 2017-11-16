@@ -12,7 +12,7 @@ package org.obeonetwork.jarvis.server.internal;
 
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
-import org.obeonetwork.jarvis.server.api.IJarvisServerStaticResourceProvider;
+import org.obeonetwork.jarvis.server.api.AbstractJarvisModule;
 import org.obeonetwork.jarvis.server.internal.extensions.AbstractRegistryEventListener;
 import org.obeonetwork.jarvis.server.internal.extensions.DescriptorRegistryEventListener;
 import org.obeonetwork.jarvis.server.internal.extensions.IItemRegistry;
@@ -66,19 +66,19 @@ public final class JarvisServerPlugin {
 	public static class Implementation implements BundleActivator {
 
 		/**
-		 * The name of the extension point for the static resource provider.
+		 * The name of the extension point for the Jarvis module.
 		 */
-		private static final String JARVIS_SERVER_STATIC_RESOURCE_PROVIDER_EXTENSION_POINT = "jarvisServerStaticResourceProvider"; //$NON-NLS-1$
+		private static final String JARVIS_MODULE_EXTENSION_POINT = "jarvisModule"; //$NON-NLS-1$
 
 		/**
-		 * The registry used to retrieve the static resource providers for the jarvis server.
+		 * The registry used to retrieve the Jarvis modules for the server.
 		 */
-		private IItemRegistry<IJarvisServerStaticResourceProvider> jarvisServerStaticResourceProviderRegistry;
+		private IItemRegistry<AbstractJarvisModule> jarvisModuleRegistry;
 
 		/**
-		 * The listener used to populate the registry of the static resource providers.
+		 * The listener used to populate the registry of the Jarvis modules.
 		 */
-		private AbstractRegistryEventListener jarvisServerStaticResourceProviderListener;
+		private AbstractRegistryEventListener jarvisModuleRegistryListener;
 
 		/**
 		 * Manager of the Jarvis server.
@@ -101,12 +101,11 @@ public final class JarvisServerPlugin {
 		@Override
 		public void start(BundleContext context) throws Exception {
 			IExtensionRegistry registry = Platform.getExtensionRegistry();
-			this.jarvisServerStaticResourceProviderRegistry = new ItemRegistry<IJarvisServerStaticResourceProvider>();
-			this.jarvisServerStaticResourceProviderListener = new DescriptorRegistryEventListener<IJarvisServerStaticResourceProvider>(PLUGIN_ID,
-					JARVIS_SERVER_STATIC_RESOURCE_PROVIDER_EXTENSION_POINT, this.jarvisServerStaticResourceProviderRegistry);
-			registry.addListener(this.jarvisServerStaticResourceProviderListener,
-					PLUGIN_ID + '.' + JARVIS_SERVER_STATIC_RESOURCE_PROVIDER_EXTENSION_POINT);
-			this.jarvisServerStaticResourceProviderListener.readRegistry(registry);
+			this.jarvisModuleRegistry = new ItemRegistry<AbstractJarvisModule>();
+			this.jarvisModuleRegistryListener = new DescriptorRegistryEventListener<AbstractJarvisModule>(PLUGIN_ID, JARVIS_MODULE_EXTENSION_POINT,
+					this.jarvisModuleRegistry);
+			registry.addListener(this.jarvisModuleRegistryListener, PLUGIN_ID + '.' + JARVIS_MODULE_EXTENSION_POINT);
+			this.jarvisModuleRegistryListener.readRegistry(registry);
 
 			this.jarvisServerManager = new JarvisServerManager();
 			this.jarvisServerManager.start(context);
@@ -123,18 +122,18 @@ public final class JarvisServerPlugin {
 
 			IExtensionRegistry registry = Platform.getExtensionRegistry();
 
-			registry.removeListener(this.jarvisServerStaticResourceProviderListener);
-			this.jarvisServerStaticResourceProviderListener = null;
-			this.jarvisServerStaticResourceProviderRegistry = null;
+			registry.removeListener(this.jarvisModuleRegistryListener);
+			this.jarvisModuleRegistryListener = null;
+			this.jarvisModuleRegistry = null;
 		}
 
 		/**
-		 * Return the jarvisServerStaticResourceProviderRegistry.
+		 * Returns the Jarvis module registry.
 		 *
-		 * @return the jarvisServerStaticResourceProviderRegistry
+		 * @return the Jarvis module registry
 		 */
-		public IItemRegistry<IJarvisServerStaticResourceProvider> getJarvisServerStaticResourceProviderRegistry() {
-			return this.jarvisServerStaticResourceProviderRegistry;
+		public IItemRegistry<AbstractJarvisModule> getJarvisModuleRegistry() {
+			return this.jarvisModuleRegistry;
 		}
 
 	}

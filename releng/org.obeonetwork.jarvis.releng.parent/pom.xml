@@ -134,7 +134,15 @@ Contributors:
     <module>../../plugins/org.obeonetwork.jarvis.workflow</module>
     <module>../../plugins/org.obeonetwork.jarvis.workflow.edit</module>
     <module>../../plugins/org.obeonetwork.jarvis.workflow.editor</module>
+    
     <module>../../plugins/org.obeonetwork.jarvis.server</module>
+    
+    <module>../../plugins/org.obeonetwork.jarvis.server.sirius.api</module>
+    <module>../../plugins/org.obeonetwork.jarvis.server.sirius.services</module>
+    <module>../../plugins/org.obeonetwork.jarvis.server.sirius</module>
+    
+    <module>../../plugins/org.obeonetwork.jarvis.workflow.page</module>
+    
     <module>../../plugins/org.obeonetwork.jarvis.webapp</module>
 
     <module>../../features/org.obeonetwork.jarvis.feature</module>
