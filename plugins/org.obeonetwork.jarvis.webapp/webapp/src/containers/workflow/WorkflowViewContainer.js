@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 
-import View from "../../presentationals/app/View";
-import WorkflowPageCard from "../../presentationals/workflow/WorkflowPageCard";
+import View from "../../components/app/View";
+import WorkflowPageCard from "../../components/workflow/WorkflowPageCard";
 
 import './WorkflowViewContainer.css';
 

@@ -5,6 +5,7 @@ script:
   - cd plugins/org.obeonetwork.jarvis.webapp/webapp
   - pwd
   - yarn install
+  - yarn coverage
   - yarn build
   - cd ../../../
   - pwd

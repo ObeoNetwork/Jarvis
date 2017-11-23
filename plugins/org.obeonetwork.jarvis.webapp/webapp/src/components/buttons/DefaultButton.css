@@ -1,0 +1,43 @@
+.Button {
+  border-radius: 2px;
+  text-transform: capitalize;
+  font-weight: var(--fontWeight-semiBold);
+  padding: var(--layoutDimension-s) var(--layoutDimension-m);
+}
+.Button:hover{
+  box-shadow: var(--boxShadow-emboss);
+}
+.Button:active{
+  box-shadow: var(--boxShadow-deboss);
+}
+
+/* Button States */
+.Button--primary {
+  background-color: var(--blue);
+  color: var(--white);
+}
+.Button--success {
+  background-color: var(--green);
+  color: var(--white);
+}
+.Button--warning {
+  background-color: var(--yellow);
+  color: var(--white);
+}
+.Button--danger {
+  background-color: var(--red);
+  color: var(--white);
+}
+.Button--ghost {
+  background-color: var(--white);
+  color: var(--slate);
+  box-shadow: var(--boxShadow-border);
+}
+.Button--ghost:hover {
+  background-color: var(--blue);
+  color: var(--white);
+}
+.Button--ghost:active {
+  background-color: var(--blue);
+  color: var(--white);
+}

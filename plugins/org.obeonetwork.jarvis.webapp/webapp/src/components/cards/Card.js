@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { classNames } from '../../common/utils';
+import { classNames } from '../../common/classNames';
 
 import './Card.css';
 
@@ -64,16 +64,7 @@ const Footer = (props) => {
   );
 };
 
-const Action = (props) => {
-  return (
-    <button className={classNames('card__action', props.className)} onClick={props.handleClick}>
-      {props.children}
-    </button>
-  );
-};
-
 export {
-  Action,
   Body,
   Card,
   Divider,

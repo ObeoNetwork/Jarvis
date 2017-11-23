@@ -3,22 +3,22 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
   grid-row-gap: 2em;
-  grid-column-gap: 2em;
+  grid-column-gap: 2rem;
 }
 
 .workflow-page-view__navbar {
   display: flex;
   flex-direction: row;
-  padding-bottom: 16px;
+  padding-bottom: var(--layoutDimension-m);
 }
 
 .workflow-page-view__navbar button {
-  margin-right: 16px;
+  margin-right: var(--layoutDimension-m);
 }
 
 .workflow-page-view__sections {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(auto-fit, 1fr);
-  grid-row-gap: 2em;
+  grid-row-gap: 2rem;
 }

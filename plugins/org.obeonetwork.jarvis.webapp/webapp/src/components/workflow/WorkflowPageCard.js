@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { Action, Body, Card, Footer, Header, Subtitle, Title } from "../cards/Card";
+import { Body, Card, Footer, Header, Subtitle, Title } from '../cards/Card';
+import { DefaultButton } from '../buttons/DefaultButton';
 
 import './WorkflowPageCard.css';
 
@@ -21,7 +22,7 @@ class WorkflowPageCard extends Component {
           {this.props.page.description}
         </Body>
         <Footer>
-          <Action handleClick={this.handleView}>View</Action>
+          <DefaultButton onClick={this.handleView}>View</DefaultButton>
         </Footer>
       </Card>
     );

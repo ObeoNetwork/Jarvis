@@ -1,0 +1,227 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Default Button Renders a Button as a link 1`] = `
+<a
+  className="Button Button--ghost"
+  href="https://www.google.com"
+  label="Click Me"
+>
+  <div
+    className="Button-Container"
+  >
+    <div
+      className="Button-Label"
+    >
+      Click Me
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Default Button Renders a Button as a link with a target 1`] = `
+<a
+  className="Button Button--ghost"
+  href="https://www.google.com"
+  label="Click Me"
+  target="_blank"
+>
+  <div
+    className="Button-Container"
+  >
+    <div
+      className="Button-Label"
+    >
+      Click Me
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Default Button Renders a Button with a click listener 1`] = `
+<button
+  className="Button Button--ghost"
+  href={undefined}
+  label="Click Me"
+  onClick={[Function]}
+>
+  <div
+    className="Button-Container"
+  >
+    <div
+      className="Button-Label"
+    >
+      Click Me
+    </div>
+  </div>
+</button>
+`;
+
+exports[`Default Button Renders a Button with a danger state 1`] = `
+<button
+  className="Button Button--danger"
+  href={undefined}
+  label="Click Me"
+>
+  <div
+    className="Button-Container"
+  >
+    <div
+      className="Button-Label"
+    >
+      Click Me
+    </div>
+  </div>
+</button>
+`;
+
+exports[`Default Button Renders a Button with a ghost state 1`] = `
+<button
+  className="Button Button--ghost"
+  href={undefined}
+  label="Click Me"
+>
+  <div
+    className="Button-Container"
+  >
+    <div
+      className="Button-Label"
+    >
+      Click Me
+    </div>
+  </div>
+</button>
+`;
+
+exports[`Default Button Renders a Button with a primary state 1`] = `
+<button
+  className="Button Button--primary"
+  href={undefined}
+  label="Click Me"
+>
+  <div
+    className="Button-Container"
+  >
+    <div
+      className="Button-Label"
+    >
+      Click Me
+    </div>
+  </div>
+</button>
+`;
+
+exports[`Default Button Renders a Button with a success state 1`] = `
+<button
+  className="Button Button--success"
+  href={undefined}
+  label="Click Me"
+>
+  <div
+    className="Button-Container"
+  >
+    <div
+      className="Button-Label"
+    >
+      Click Me
+    </div>
+  </div>
+</button>
+`;
+
+exports[`Default Button Renders a Button with a warning state 1`] = `
+<button
+  className="Button Button--warning"
+  href={undefined}
+  label="Click Me"
+>
+  <div
+    className="Button-Container"
+  >
+    <div
+      className="Button-Label"
+    >
+      Click Me
+    </div>
+  </div>
+</button>
+`;
+
+exports[`Default Button Renders a Button with the label as child 1`] = `
+<button
+  className="Button Button--ghost"
+  href={undefined}
+  label={undefined}
+>
+  <div
+    className="Button-Container"
+  >
+    <div
+      className="Button-Label"
+    >
+      Click Me
+    </div>
+  </div>
+</button>
+`;
+
+exports[`Default Button Renders a Button with the label as props 1`] = `
+<button
+  className="Button Button--ghost"
+  href={undefined}
+  label="Click Me"
+>
+  <div
+    className="Button-Container"
+  >
+    <div
+      className="Button-Label"
+    >
+      Click Me
+    </div>
+  </div>
+</button>
+`;
+
+exports[`Default Button Renders a Button without a label 1`] = `
+<button
+  className="Button Button--ghost"
+  href={undefined}
+  label={undefined}
+>
+  <div
+    className="Button-Container"
+  />
+</button>
+`;
+
+exports[`Default Button Renders an alternate contents with onRenderContainer 1`] = `
+<button
+  className="Button Button--ghost"
+  href={undefined}
+  label="Click Me"
+>
+  <div
+    className="Button-Container"
+  >
+    Alternate Content
+  </div>
+</button>
+`;
+
+exports[`Default Button Renders an alternate label with onRenderLabel 1`] = `
+<button
+  className="Button Button--ghost"
+  href={undefined}
+  label="Click Me"
+>
+  <div
+    className="Button-Container"
+  >
+    <div
+      className="Button-Label"
+    >
+      Alternate Label
+    </div>
+  </div>
+</button>
+`;

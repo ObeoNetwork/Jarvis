@@ -1,6 +1,6 @@
 import React from 'react';
 
-import View from "../../presentationals/app/View";
+import View from "../../components/app/View";
 
 import './SessionViewContainer.css';
 

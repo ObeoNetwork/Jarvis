@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 
-import View from "../../presentationals/app/View";
-import ViewerCard from "../../presentationals/workflow/ViewerCard";
-import WorkflowSectionCard from "../../presentationals/workflow/WorkflowSectionCard";
+import View from '../../components/app/View';
+import {
+  DefaultButton,
+  DefaultButtonState
+} from '../../components/buttons/DefaultButton';
+import ViewerCard from '../../components/workflow/ViewerCard';
+import WorkflowSectionCard from '../../components/workflow/WorkflowSectionCard';
 
 import './WorkflowPageViewContainer.css';
 
@@ -31,7 +35,6 @@ class WorkflowPageViewContainer extends Component {
       const representations = responses[1].representations;
 
       this.setState((prevState, props) => {
-        console.log(responses);
         return {
           isLoading: false,
           page,
@@ -63,10 +66,10 @@ class WorkflowPageViewContainer extends Component {
     }
     if (this.state.page) {
       if (this.state.page.previousPageId) {
-        previousPageButton = <button onClick={this.handleGoToPreviousPage}>Previous</button>;
+        previousPageButton = <DefaultButton label='Previous' onClick={this.handleGoToPreviousPage}/>;
       }
       if (this.state.page.nextPageId) {
-        nextPageButton = <button onClick={this.handleGoToNextPage}>Next</button>;
+        nextPageButton = <DefaultButton label='Next' onClick={this.handleGoToNextPage}/>;
       }
     }
     if (this.state.representations) {
@@ -75,7 +78,7 @@ class WorkflowPageViewContainer extends Component {
     return (
       <View className='workflow-page-view' title={this.state.page.label}>
         <div className='workflow-page-view__navbar'>
-          <button onClick={this.handleGoToWorkflow}>Workflow</button>
+          <DefaultButton label='Workflow' state={DefaultButtonState.primary} onClick={this.handleGoToWorkflow} />
           {previousPageButton}
           {nextPageButton}
         </div>

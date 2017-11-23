@@ -1,0 +1,35 @@
+= Buttons
+
+Buttons can be used to let the user perform an action.
+They can also be used to navigate to another part of the application.
+Prefer links to buttons to perform the navigation unless this navigation is part of the flow of a process (i.e. a wizard).
+Use concise and self-explanatory label for your buttons.
+Those labels should at least include a verb indicating the action that will be performed (i.e. "Create Something" instead of "OK", etc).
+
+== API
+
+The DefaultButton component supports all the regular properties of a DOM element.
+Those properties include *all the event handlers* (onClick, onBlur, onMouseOver, etc) and *all the default attributes* (style, className, htmlFor, etc).
+
+On top of that, it provides additional properties specific to this component.
+The label of the button can be provided thanks to either the *label* property or using a text element as the child of the button component.
+The property *state* is used to indicate the state of the button.
+Multiple states are available thanks to the variable *DefaultButtonState*.
+The button widget does not support both a *label* property and children of the component.
+The property *href* is used to indicate that a button should be created as a link instead of a button element.
+The property *onRenderContainer* is a render function used to create the content of the button or link.
+The property *onRenderLabel* is a render function used to create the label of the button or link.
+
+== Examples
+
+In order to user the default button, you will have to start by importing it.
+[source,javascript,indent=0]
+----
+include::./DefaultButton.test.js[tag=import]
+----
+
+Then you can use it like in the following examples.
+[source,javascript,indent=0]
+----
+include::./DefaultButton.test.js[tag=examples]
+----

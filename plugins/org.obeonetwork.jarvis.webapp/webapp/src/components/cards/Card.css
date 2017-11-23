@@ -1,11 +1,11 @@
 .card {
-  background-color: hsl(0, 0%, 100%);
-  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+  background-color: var(--white);
+  box-shadow: var(--boxShadow-float);
   border-radius: 2px;
 }
 
 .card__header {
-  padding: 16px 16px 16px 16px;
+  padding: var(--layoutDimension-m);
 }
 
 .card__divider {
@@ -24,7 +24,7 @@
 }
 
 .card__body {
-  padding: 0px 16px 0px 16px;
+  padding: 0px var(--layoutDimension-m) 0px var(--layoutDimension-m);
   line-height: 1.3rem;
 }
 
@@ -40,11 +40,11 @@
 }
 
 .card__item__text {
-  padding: 16px 0px 16px 0px;
+  padding: var(--layoutDimension-m) 0px var(--layoutDimension-m) 0px;
 }
 
 .card__item__link {
-  padding: 16px 0px 16px 0px;
+  padding: var(--layoutDimension-m) 0px var(--layoutDimension-m) 0px;
   cursor: pointer;
   color: var(--main-color-darker);
 }
@@ -53,7 +53,7 @@
 }
 
 .card__item_avatar {
-  padding: 16px 16px 16px 0px;
+  padding: var(--layoutDimension-m) var(--layoutDimension-m) var(--layoutDimension-m) 0px;
 }
 
 .card__item__icon {
@@ -65,5 +65,5 @@
 .card__footer {
   display: flex;
   flex-direction: row;
-  padding: 16px 16px 16px 16px;
+  padding: var(--layoutDimension-m);
 }

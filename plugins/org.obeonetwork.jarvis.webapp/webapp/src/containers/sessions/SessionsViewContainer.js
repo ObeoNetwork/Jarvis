@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import SessionCard from "../../presentationals/sessions/SessionCard";
-import View from "../../presentationals/app/View";
+import SessionCard from "../../components/sessions/SessionCard";
+import View from "../../components/app/View";
 
 import './SessionsViewContainer.css';
 

@@ -1,0 +1,12 @@
+.workflow-section-card .card__item__icon {
+  stroke: var(--blue);
+  fill: var(--blue);
+}
+.workflow-section-card .card__item__icon:hover {
+  stroke: var(--light-blue);
+  fill: var(--light-blue);
+}
+.workflow-section-card .card__item__icon:active {
+  stroke: var(--dark-blue);
+  fill: var(--dark-blue);
+}
