@@ -1,0 +1,293 @@
+= Style Guide
+Stéphane Bégaudeau <stephane.begaudeau@obeo.fr>
+v1.0, 2017-111-16
+
+:sourcedir: ../src
+
+== Introduction
+
+The goal of this style guide is to contain the fundamental principles used to define applications sharing our design language.
+In a web application, developers tend to copy and paste lot of code regarding sizes, colors, margin and countless of HTML and CSS elements.
+This document defines all the properties of our design language that should be reused accross various applications.
+
+== Design Principles
+
+Before starting by defining the technical properties of our design language, we will first have a look at its philosophy.
+We want our applications to reflect the way we think about our work.
+As a result, our applications should share the following properties:
+
+* Professional
+* Pleasant
+* Adaptable
+* Dynamic
+
+Those principles will be used to judge the quality of our design language and to evaluate the gap between the user experience of an application and our expected result.
+You should not think of those principles as a marketing speech for the end users.
+They shoud instead be used by both designers and developers alike in order to have a guideline to build applications.
+
+As an example, you can think of a pleasant application as an application in which the user can easily find how to realize his tasks.
+A professional application should be able to let the user manipulate large amount of complex pieces of information easily and it should also display clear and meaningful errors messages.
+A dynamic application must provide the end users with some feedback when a long running process is running.
+To build an adaptable application, you must support newcomers and advanced users alike with both basic features and support for complex use cases.
+
+Use those principles to judge in a concrete manner the result of your work on a day to day basis.
+Our principles will evolve over time just like the user experience of our applications.
+
+== Naming Conventions
+
+=== Components
+
+All the components should be separated between stateful and stateless ones.
+Stateless components should not have any constraints regarding the environement in which they can be used (url for example).
+Stateful components should be located in a folder named _containers_ while stateless ones should be located in a folder named _components_.
+The folders containing the components should be plural while the components themself should be singular.
+
+The components should be organized by the feature they provide, not by their technical role.
+As a result, an imaginary _ButtonService_ and an imaginary _ButtonComponent_ should be both in a _buttons_ folder not in _services_ and _components_ folders.
+If the organization becomes too complex, subfolder specific to the technical role of the component can be introduced but a feature-based organization will be more relevant 99% of the time.
+
+=== CSS
+
+Our projects will contain two kind of CSS classes.
+The first one, _property-based classes_ will be used to modify the behavior of some specific CSS property.
+They will mostly be used by stateless components in order to create a set of coherent looking reusable components.
+
+Their name will adhere to the following naming convention: `stylePropertyName-valueName` like `fontSize-xxl`.
+Property-based CSS classes will define the core property values will should be shared by all our components like font-size, padding, margin, colors...
+
+The second kind of CSS classes are _component-based classes_.
+Component-based CSS classes are used by both stateless and stateful components to identify the various parts of the components which can be influenced by CSS rules.
+They should be named using the following convention: `Component-Element\--state` like `LoginCard-Username\--invalid`.
+
+== Performance
+
+The performance of our application will be a critical aspect of our work.
+While developing web applications you will have to be especially careful to this aspect.
+The performance of a process in an application can be defined by four properties: Its duration, responsiveness, fluency and the tolerance.
+
+=== Duration
+
+We can define four categories of duration for the process executed by our applications (like clicking on a button and observing some result):
+
+[cols=2*]
+|===
+|Instantaneous
+|less than 100ms
+
+|Immediate
+|between 100ms and 1000 ms
+
+|Continuous
+|between 1000ms and 5000 ms
+
+|Captive
+|more than 5000ms
+|===
+
+Reacting to the user input should be instantaneous (i.e. indicating that the cursor is over a button).
+Performing some simple task should be immediate like opening a new tab.
+A continuous task requires a loading indicator to inform the end user that the result will take some time to be computed.
+A captive process should not only display a loading indicator but also proper messages detailling the steps of the process.
+
+=== Responsiveness
+
+It is of paramount importance to lower as much as possible the time perceived by the end user.
+As a result, we should strive to display some feedback to user input as fast as possible.
+We should leverage lazy loading in order to speed up the time to render in our application.
+
+=== Fluency
+
+While a process may take some time to complete, it should not slow the user interface which should remain responsive at all time.
+If it is possible for the user to cancel a long running task, he should receive some feedback quickly and the task should be cancelled as soon as possible.
+
+=== Tolerance
+
+Captive processes will require messages detailling the process but also the currently executed subtask.
+Very long processes should also allow the end user to switch to another part of the application before coming back later to see the new state of the process (i.e. continuous integration tools like Jenkins).
+
+== Typography
+
+=== Typeface
+
+Our primary typeface is `Open Sans`, a free typeface which can be found on Google Fonts.
+
+=== Sizes
+
+9 font sizes are supported in our applications. The default font size in our applications is *small*.
+
+* Extra extra small
+* Extra small
+* Small
+* Medium
+* Large
+* Extra Large
+* Extra extra large
+* Extra extra extra large
+* Extra extra extra extra large
+
+The various font sizes are accessible with the following CSS variables.
+
+[source,css,indent=0]
+----
+include::{sourcedir}/index.css[tag=fontsizes]
+----
+
+=== Weight
+
+We are supporting five font weights for Open Sans. The default font weight in the body is *regular*.
+
+* Light
+* Regular
+* Semi-Bold
+* Bold
+* Extra-Bold
+
+Those font weight can be applied usong the following CSS variables.
+[source,css,indent=0]
+----
+include::{sourcedir}/index.css[tag=fontweights]
+----
+
+=== Text styles
+
+By combining the font sizes and the font weights, we can produce by default the following text styles.
+
+* Extra Large Title
+* Large Title
+* Medium Title
+* Small Title
+* Large Body
+* Medium Body
+* Large Caption
+* Medium Caption
+
+They can be used with the following CSS classes.
+
+[source,css]
+----
+.title-xl
+.title-l
+.title-m
+.title-s
+.body-l
+.body-m
+.caption-l
+.caption-m
+----
+
+You can produce new text styles by mixing other font size and font weight but these are the most important ones that you should use most of the time.
+
+=== Line Length
+
+You need to take care about the number of characters per line to produce documents which can be read easily.
+When you will define the layout of your elements, you should ensure that most of your lines stay between *45 and 75 characters on a desktop* and between *35 and 40 characters on mobile devices*.
+The perfect number of characters in a line in a desktop environement is around 66 and around 39 characters for a mobile device.
+Do not put more than 90 characters per line on a desktop and 50 characters per line on a mobile device.
+
+=== Line Height
+
+In order to ensure a proper readability of the text in our application, you can use the link:https://pearsonified.com/typography[golden ratio typeography calculator] to compute a proper line height.
+Since the best line height is influenced by a lot of factors, it is quite difficult to specify one size for all the parts of the application.
+By default, the various text style come with dedicated line height.
+
+You can find the line heights used in the default text styles below.
+
+[source,css,indent=0]
+----
+include::{sourcedir}/index.css[tag=lineheights]
+----
+
+== Colors
+
+In our applications, we will use one of the core color defined below.
+Each of the core color is available in a regular, light and dark version.
+The regular version is the one that you should use most of the time.
+Light and dark versions can be used to indicate a change in the state of the element displayed.
+
+* Light Blue, Blue, Dark Blue
+* Light Green, Green, Dark Green
+* Light Yellow, Yellow, Dark Yellow
+* Light Orange, Orange, Dark Orange
+* Light Red, Red, Dark Red
+* Light Pink, Pink, Dark Pink
+* Light Purple, Purple, Dark Purple
+
+Blue should be used as the primary color for the main elements.
+It should be used as accent color for links, active states and in order to highlight buttons and actions.
+Green should be used to indicate the success of an action or a positive situation.
+Yellow should be used to indicate a warning regarding the current situation.
+Red should be used to indicate the failure of an action or to give a negative feedback.
+It can be used as the background color of destructive tasks like the deletion of an account.
+Pink and purple should only be used to differentiate some elements in a situation where additional colors are needed.
+For example, in some search results, a colored label can be used to show the type of the element.
+In such situation, a large number of different colors will be necessary and the pink and purple could be used.
+
+Those colors can be accessed using the following CSS variables.
+[source,css,indent=0]
+----
+include::{sourcedir}/index.css[tag=corecolors]
+----
+
+=== Black and white
+
+The following black and white colors are also available.
+
+* Black, Steel, Slate, Silver
+* Light Smoke, Smoke, Dark Smoke
+* Light Snow, Snow, Dark Snow
+* White
+
+You can leverage them with the following CSS variables
+[source,css,indent=0]
+----
+include::{sourcedir}/index.css[tag=blackandwhitecolors]
+----
+
+=== Color Match
+
+By default the body of the application will use *Slate* as the color of the text.
+If you want to use one of the core colors as the background of an element, then you should use *White* as the foreground color.
+For white, varitions of Snow and Smoke, you should use *Slate* as the foreground color.
+For example, a primary button should have a *Blue* background with a *White* label.
+If you want to create a light/dark theme for your application, you can use the following color configuration.
+
+* Slate text with a White, Snow and Light Smoke background
+* White text with a Black, Steel and Slate background
+
+== Layout
+
+Since most of the elements of our application may be reused in other context, we will make sure to share the same kind of layout conventions.
+Six dimensions of margin and padding are supported by this design guide.
+
+* Extra small
+* Small
+* Medium
+* Large
+* Extra large
+* Extra extra large
+
+Those dimensions can be used with regular CSS variables.
+
+[source,css,indent=0]
+----
+include::{sourcedir}/index.css[tag=layoutdimensions]
+----
+
+By default in most of our elements with a custom layout a padding using the *medium* size is used.
+For example, cards should use a medium padding with the CSS classe padding-m.
+Within a card, some complex arrangements of elements may require some fine tuning of the layout with those CSS classes.
+
+== Borders
+
+Most of the borders are not using directly CSS borders but instead they are created using CSS box-shadows.
+Those shadows can thus be combined easily with any core CSS colors to give additional depths to an element.
+
+The following variables to manipulate box-shadows are available.
+
+[source,css,indent=0]
+----
+include::{sourcedir}/index.css[tag=boxshadows]
+----
+
+The variable --boxShadow-deboss can be used to show that the user can press on an element (i.e. button).
+On the other hand, the variable --boxShadow-deboss can be used to represent that the user is currently pressing on an element (i.e. a button).
