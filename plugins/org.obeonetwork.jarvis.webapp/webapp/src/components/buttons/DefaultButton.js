@@ -43,9 +43,7 @@ export class DefaultButton extends Component {
       href,
       label,
       state,
-      children,
-      onRenderLabel,
-      onRenderContainer
+      children
     } = this.props;
     
     const nativeProperties = computeNativeProperties(this.props, domElementProperties);
